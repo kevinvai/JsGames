@@ -94,10 +94,10 @@ function canMoveTo(destX, destY) {
             clearInterval(intervalVar); // we'll set the timer later in this article
             makeWhite(0, 0, canvas.width, canvas.height);
             context.font = "40px Arial";
-            context.fillStyle = "blue";
+            context.fillStyle = "Green";
             context.textAlign = "center";
             context.textBaseline = "middle";
-            context.fillText("Congratulations!", canvas.width / 2, canvas.height / 2);
+            context.fillText("¡TERMINASTE!", canvas.width / 2, canvas.height / 2);
             window.removeEventListener("keydown", moveRect, true);
         }
     }
