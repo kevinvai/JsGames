@@ -38,8 +38,8 @@ function canMoveTo(destX, destY) {
     var imgData = context.getImageData(destX, destY, 15, 15);
     var data = imgData.data;
     var canMove = 1; // 1 significa el rectangulo se puede mover
-    if (destX >= 0 && destX <= mazeWidth - 15 && destY >= 0 && destY <= mazeHeight - 15) { // check whether the rectangle would move inside the bounds of the canvas
-        for (var i = 0; i < 4 * 15 * 15; i += 4) { // look at all pixels
+    if (destX >= 0 && destX <= mazeWidth - 15 && destY >= 0 && destY <= mazeHeight - 15) { // check si se puede mover el rectangulo
+        for (var i = 0; i < 4 * 15 * 15; i += 4) { // checktodoslospixeles
             if (data[i] === 0 && data[i + 1] === 0 && data[i + 2] === 0) { // negro
                 canMove = 0; // 0 significa que el recangulo no puede moverse
                 break;
@@ -64,21 +64,21 @@ function canMoveTo(destX, destY) {
             //case 38:   // upkey
             case 87: // W key
                 newX = currRectX;
-                newY = currRectY - 20;
+                newY = currRectY - 3;
                 break;
-            //case 37: // leftkey
+            //case 37: //leftkey
             case 65: // A key
-                newX = currRectX - 20;
+                newX = currRectX - 3;
                 newY = currRectY;
                 break;
             //case 40: // downkey
             case 83: // S key
                 newX = currRectX;
-                newY = currRectY + 20;
+                newY = currRectY + 3;
                 break;
             //case 39: // rightkey
             case 68: // D key
-                newX = currRectX + 20;
+                newX = currRectX + 3;
                 newY = currRectY;
                 break;
             default:
@@ -90,8 +90,8 @@ function canMoveTo(destX, destY) {
             currRectX = newX;
             currRectY = newY;
         }
-        else if (movingAllowed === 2) {
-            //clearInterval(intervalVar);
+        else if (movingAllowed === 2) { //
+            //clearInterval(intervalVar); // we'll set the timer later in this article
             makeWhite(0, 0, canvas.width, canvas.height);
             context.font = "40px Arial";
             context.fillStyle = "Green";
@@ -111,5 +111,5 @@ function canMoveTo(destX, destY) {
         context.fill();
     }
 }
-drawMazeAndRectangle(425, 3); // { 425, 3 } posicion del rectangulo azul
+drawMazeAndRectangle(425, 3); // { 425, 3 } posicion del rectangulo
 window.addEventListener("keydown", moveRect, true);
