@@ -74,6 +74,7 @@
     }
 
     function moveRect(e) {
+        var estado = new Boolean(false);
         var newX;
         var newY;
         var canMove;
@@ -107,6 +108,8 @@
             drawRectangle(newX, newY, "#0000FF");
             currRectX = newX;
             currRectY = newY;
+            estado === false;
+            //alert(estado); debug
         }
         else if (movingAllowed === 2) { //
             //clearInterval(intervalVar);
@@ -116,7 +119,9 @@
             context.textAlign = "center";
             context.textBaseline = "middle";
             context.fillText("¡Terminaste!", canvas.width / 2, canvas.height / 2);
+            estado === true;
             window.removeEventListener("keydown", moveRect, true);
+            //alert(estado); debug
         }
     }
 
