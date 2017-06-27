@@ -75,6 +75,7 @@
 
     function moveRect(e) {
         var estado = new Boolean(false);
+        var pos = [];
         var newX;
         var newY;
         var canMove;
@@ -109,7 +110,9 @@
             currRectX = newX;
             currRectY = newY;
             estado === false;
+            pos = [currRectX,currRectY];
             //alert(estado); debug
+            alert(pos);
         }
         else if (movingAllowed === 2) { //
             //clearInterval(intervalVar);
