@@ -74,45 +74,87 @@
     }
 
     function moveRect(e) {
-        var estado = new Boolean(false);
-        var pos = [];
+        var estado = new Boolean(false); //variable para saber si el usuario terminó o no el laberinto
+        var pos = []; //guarda posicion de donde se movio el cubo para saber a donde se movió el usuario
         var newX;
         var newY;
-        var canMove;
+        var canMove; // ni idea que hacia esto.
         e = e || window.event;
+        moveA = 22; //1
+        moveB = 22; //22
+        var angle = 0;
         switch (e.keyCode) {
-            //case 38:   // upkey
+            case 38:   // upkey
+                newX = currRectX;
+                newY = currRectY - moveA;
+                angle = 90;
+                break;
             case 87: // W key
                 newX = currRectX;
-                newY = currRectY - 6;
+                newY = currRectY - moveB;
+                angle = 90;
                 break;
-            //case 37: // leftkey
-            case 65: // A key
-                newX = currRectX - 6;
+            case 37: // leftkey
+                newX = currRectX - moveA;
                 newY = currRectY;
+                angle = 180;
                 break;
-            //case 40: // downkey
+            case 65: // A key
+                newX = currRectX - moveB;
+                newY = currRectY;
+                angle = 180;
+                break;
+            case 40: // downkey
+                newX = currRectX;
+                newY = currRectY + moveA;
+                angle = 270;
+                break;
             case 83: // S key
                 newX = currRectX;
-                newY = currRectY + 6;
+                newY = currRectY + moveB;
+                angle = 270;
                 break;
-            //case 39: //rightkey
+            case 39: //rightkey
+                newX = currRectX + moveA;
+                newY = currRectY;
+                break;
             case 68: // D key
-                newX = currRectX + 6;
+                newX = currRectX + moveB;
                 newY = currRectY;
                 break;
             default:
                 return;
         }
-        movingAllowed = canMoveTo(newX, newY);
+
+        var colisionX = 0;
+        var colisionY = 0;
+        if(angle == 0){
+            colisionX = 10; //-X
+        }
+        else if (angle == 90){
+            colisionY = -10 // -Y
+        }
+        else if (angle == 180){
+            colisionX = -10; //-X
+        }
+        else if (angle == 270){
+            colisionY = 10 // Y
+        }
+
+        movingAllowed = canMoveTo(newX-colisionX, newY-colisionY);
         if (movingAllowed === 1) {
-            drawRectangle(newX, newY, "#0000FF");
+            drawRectangle(newX,newY, "#0000FF");
+
+            //console.log( "old: "+currRectX+","+currRectY+" - "+difX+"_"+difY );
+
             currRectX = newX;
             currRectY = newY;
-            estado === false;
+            estado === false; //false siginifica que no terminó el laberinto
             pos = [currRectX,currRectY];
+
             //alert(estado); debug
-            alert(pos);
+            console.log(pos); //debug
+            //alert(Math.random(100,400));
         }
         else if (movingAllowed === 2) { //
             //clearInterval(intervalVar);
@@ -122,7 +164,7 @@
             context.textAlign = "center";
             context.textBaseline = "middle";
             context.fillText("¡Terminaste!", canvas.width / 2, canvas.height / 2);
-            estado === true;
+            estado === true; //true significa que terminó el laberinto
             window.removeEventListener("keydown", moveRect, true);
             //alert(estado); debug
         }
@@ -180,7 +222,7 @@
 
     }
 
-    drawMazeAndRectangle(425, 3); // { 425, 3 } posicion de rectangulo
+    drawMazeAndRectangle(425,6); // { 425, 3 } posicion de rectangulo
     window.addEventListener("keydown", moveRect, true);
 </script>
 </html>
