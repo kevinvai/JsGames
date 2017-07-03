@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script
-             src="../assets/js/raphael1.js">
 
-    </script>
+    <script src="../assets/js/raphael1.js"></script>
+    <script src="../bower_components/jquery/dist/jquery.js"></script>
+    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+
 
     <style type="text/css">
         #canvas_container {
@@ -15,15 +16,47 @@
 
 
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Test raphael</title>
 </head>
 <body>
+<div id="canvas"></div>
 <script>
+    Raphael.st.draggable = function() {
+            var me = this,
+                lx = 0,
+                ly = 0,
+                ox = 0,
+                oy = 0,
+                moveFnc = function(dx, dy) {
+                    lx = dx + ox;
+                    ly = dy + oy;
+                    me.transform('t' + lx + ',' + ly);
+                },
+                startFnc = function() {},
+                endFnc = function() {
+                    ox = lx;
+                    oy = ly;
+                };
+
+            this.drag(moveFnc, startFnc, endFnc);
+        };
+
+
+
     // Creates canvas 250 × 250 at 0, 0
-    canvas = Raphael(0, 0, 250, 250 );
+    //canvas = Raphael(0, 0, 250, 250 );
     // Creates circle at x = 125, y = 125, with radius 50
-    var circle = canvas.circle(125, 125, 50);// Sets the fill attribute of the circle to red (#f00)
+        $(function()
+        {
+            var paper = Raphael(document.getElementById('canvas'));
+            var mySet = paper.set();
+            mySet.push(paper.circle(550, 150, 50).attr('fill', 'red'));
+            mySet.push(paper.circle(550, 150, 40).attr('fill', 'white'));
+            mySet.push(paper.rect(400,400,20,30).attr('fill', 'blue'));
+            mySet.draggable();})
+    /*var circle = canvas.circle(125, 125, 50);// Sets the fill attribute of the circle to red (#f00)
     circle.attr("fill", "black");
+    circle.onmousedown();
     // Sets the stroke attribute of the circle to white
     circle.attr("stroke", "#fff");
     // Creates rectangle at x = 5, y = 5, with width and height = 50
@@ -31,8 +64,8 @@
     rectangle.attr("fill", "green");
     // Creates ellipse at x and y = 180 ,horizontal-axis = 20 and vertical-axis = 30
     var ellipse = canvas.ellipse(180, 180, 20, 30);
-    ellipse.attr("fill", "red");
-    console.log("aaaaah");
+    ellipse.attr("fill", "red");*/
+
 </script>
 </body>
 </html>
