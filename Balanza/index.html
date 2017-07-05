@@ -52,6 +52,7 @@
 
         var stack = Composites.stack(170, 255, 1, 4, 0, 0, function (x, y) { //distancia en x,y,?,iteraciones,?,?
             return Bodies.rectangle(x, y, 30, 30);
+            return bodyA.friction(1); //se deslizan mas lento los objetos.
         });
 
         var catapult = Bodies.rectangle(400, 520, 320, 20);
@@ -67,6 +68,12 @@
             //Bodies.rectangle(250, 555, 20, 50, { isStatic: true }),
             //Bodies.circle(560, 100, 50, { density: 0.005 }),
             //Constraint.create(),
+            //paredes
+            Bodies.rectangle(400, 0, 800, 50, {isStatic: true}),
+            Bodies.rectangle(400, 600, 800, 50, {isStatic: true}),
+            Bodies.rectangle(800, 300, 50, 600, {isStatic: true}),
+            Bodies.rectangle(0, 300, 50, 600, {isStatic: true}),
+
             Constraint.create({bodyA: catapult, pointB: {x: 390, y: 560}}),
             Constraint.create({bodyA: catapult, pointB: {x: 410, y: 560}}),
             Constraint.create({bodyA: Bodies.rectangle(550,560,15,20.5), pointB: {x: 410, y: 560}}),
@@ -88,13 +95,13 @@
 
         World.add(world, mouseConstraint);
 
-        World.add(world, [
+       /* World.add(world, [
             // walls
             Bodies.rectangle(400, 0, 800, 50, {isStatic: true}),
             Bodies.rectangle(400, 600, 800, 50, {isStatic: true}),
             Bodies.rectangle(800, 300, 50, 600, {isStatic: true}),
             Bodies.rectangle(0, 300, 50, 600, {isStatic: true})
-        ]);
+        ]);*/
 
         // keep the mouse in sync with rendering
         render.mouse = mouse;
