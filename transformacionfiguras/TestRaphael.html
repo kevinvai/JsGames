@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="../bower_components/raphael/raphael.js"></script>
+    <script src="../bower_components/raphael/raphael.min.js"></script>
+    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+    <meta charset="UTF-8">
+    <title>Raphael</title>
+</head>
+<body>
+<body>
+<div id="container"></div>
+<script>
+
+    function polygon(x, y, size, sides, rotate) {
+        var self = this;
+
+        self.centrePoint = [x,y];
+        self.size = size;
+        self.sides = sides;
+        self.rotated = rotate;
+        self.sizeMultiplier = 50;
+
+        self.points = [];
+
+        for (i = 0; i < sides; i++) {
+            self.points.push([(x + (self.size * self.sizeMultiplier) * (rotate ? Math.sin(2 * 3.14159265 * i / sides) : Math.cos(2 * 3.14159265 * i / sides))), (y + (self.size * self.sizeMultiplier) * (rotate ? Math.cos(2 * 3.14159265 * i / sides) : Math.sin(2 * 3.14159265 * i / sides)))]);
+        }
+
+        self.svgString = 'M' + self.points.join(' ') + ' L Z';
+    }
+
+    var paper = Raphael(300, 100, 620, 500);
+
+    var tri = paper.path("M0,0 L100,0 100,50 z").attr("fill", "#ff0");//rectangulo triangulo
+    //var tri22 = paper.path("M0,0 L100,100 100,0 z").attr("fill", "#ff0");//rectangulo triangulo
+    var tri2 = paper.path("M0,50 L0, 100 100 100").attr("fill", "#ff0");//rectangulo triangulo
+    //var tri22 = paper.path("M0,0 L0,100 100,0 z").attr("fill", "#ff0");//otro rombo o cuadrado
+    //var tri2 = paper.path("M0,0 L0,100 50,50 z").attr("fill", "#ff0"); //triangulo rombo
+    //var tri3 = paper.path("M0,50 L50,0 50,100 z").attr("fill", "#ff0");
+    var tri4 = paper.path("M0,30 L0, 100 50,100 z").attr("fill", "#ff0");
+    var rex = paper.rect(300, 400, 50, 50).attr("fill", "#ff0");
+    var rex2 = paper.rect(200, 400, 50, 50).attr("fill", "#ff0");
+    var rect = paper.rect(400,400,100,50).attr("fill", "#ff0");
+    //var circ = paper.circle(50,50,50).attr('fill', '#ff0');
+    var start = function () {
+            this.odx = 0;
+            this.ody = 0;
+            this.animate({"fill-opacity": 0.2}, 500);
+        },
+        move = function (dx, dy) {
+            this.translate(dx - this.odx, dy - this.ody);
+            this.odx = dx;
+            this.ody = dy;
+        },
+        up = function () {
+            this.animate({"fill-opacity": 1}, 500);
+        };
+
+    tri.drag(move, start, up);
+    tri2.drag(move, start, up);
+    //tri22.drag(move, start, up);
+    //tri3.drag(move,start,up);
+    tri4.drag(move,start,up);
+    rex.drag(move, start, up);
+    rex2.drag(move, start, up);
+    rect.drag(move, start, up);
+    //circ.drag(move,start,up);
+
+    $(document).ready(function() {
+        //var paper = Raphael(0, 0, 450, 450);
+
+        //ar path1 = new polygon(100, 100, 2, 6, false);
+        var path2 = new polygon(205, 187, 1, 6, false);
+        //var path3 = new polygon(100, 277, 2, 6, false);
+
+        //var hex1 = paper.path(path1.svgString).drag(move, start, up);
+        var hex2 = paper.path(path2.svgString).drag(move,start, up);
+        //var hex3 = paper.path(path3.svgString);
+
+        //hex1.node.id = "hex1";
+        //hex1.attr("fill", "#ccc");
+        //hex1.attr("stroke", "#aceace");
+
+        hex2.node.id = "hex2";
+        hex2.attr("fill", "#ff0");
+        hex2.attr("stroke", "#aceace");
+    });
+
+
+   function doRevisar(){
+        //Revisar si las figuras chocan
+       //hacer un id para cada figura completa
+       //
+
+
+
+   }
+
+</script>
+
+
+</body>
+</html>
