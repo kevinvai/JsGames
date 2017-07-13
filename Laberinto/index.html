@@ -1,38 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="../bower_components/jquery/dist/jquery.js"></script>
     <meta charset="UTF-8">
     <title>Here is the  MAZEE</title>
     <style>
 
-        table {
-            border-collapse: collapse;
-            border-width: 20px;
-            width: 100%;
+
+
+        .canvas_container {
+            width: 500px;
+            border: 1px solid #aaa;
         }
 
-        th, td {
-            text-align: left;
-            padding: 8px;
+        .background{
+
+            background-color: blue;
+        }
+
+        .background2{
+
+            background-color: black;
         }
 
 
-        tr:nth-child(even) {
-            background-color: #f2f2f2
-        }
-
-
-        th {
-            font-size: small;
-            background-color: white;
-            color: #D55307;
-        }
 
 
 
     </style>
 </head>
 <body>
+<div class="background">
+
+</div>
+
+
+
 <p>Termina el laberinto movienedo el cuadro azul con las teclas W - mover hacia arriba, A - mover a la izquierda, S - mover hacia abajo, D - mover a la derecha</p>
 <!--
 <div>
@@ -52,9 +56,9 @@
 </table>
 </div>
 -->
-<canvas width="616" height="556" id="mazecanvas">Tu navegador no soporta html5.</canvas>
+<canvas width="616" height="556" id="mazecanvas">Tu navegador no soporta html5.
+</canvas>
 <noscript>Js no activo aqui.</noscript>
-</body>
 <script>
     var canvas = document.getElementById("mazecanvas");
     var context = canvas.getContext("2d");
@@ -62,6 +66,8 @@
     var currRectY = 3;
     var mazeWidth = 556;
     var mazeHeight = 556;
+    var pos = [];
+    var arr = []; //guarda posicion de donde se movio el cubo para saber a donde se movió el usuario
     var intervalVar;
 
 
@@ -75,7 +81,6 @@
 
     function moveRect(e) {
         var estado = new Boolean(false); //variable para saber si el usuario terminó o no el laberinto
-        var pos = []; //guarda posicion de donde se movio el cubo para saber a donde se movió el usuario
         var newX;
         var newY;
         var canMove; // ni idea que hacia esto.
@@ -141,19 +146,41 @@
             colisionY = 10 // Y
         }
 
+
+        pos = ( newY);
+        console.log(pos);
+        arr.push({ x : newX, y : newY });
+
+
+
+
         movingAllowed = canMoveTo(newX-colisionX, newY-colisionY);
         if (movingAllowed === 1) {
             drawRectangle(newX,newY, "#0000FF");
-
+            //drawLine();
             //console.log( "old: "+currRectX+","+currRectY+" - "+difX+"_"+difY );
+            alert(currRectY);
+            $(document).ready(function() {
+                $("#btn1").click(function () {
+
+
+                    var newLine = document.createElementNS('canvas', 'line');
+                    newLine.setAttribute('id', 'line2');
+                    newLine.setAttribute('x1', newX);
+                    newLine.setAttribute('y1', newY);
+                    newLine.setAttribute('x2', parseInt(currRectX));
+                    newLine.setAttribute('y2', parseInt(currRectY));
+                    newLine.setAttribute('stroke', 'black');
+                    $('svg').append('newLine');
+                });
+            });
 
             currRectX = newX;
             currRectY = newY;
             estado === false; //false siginifica que no terminó el laberinto
-            pos = [currRectX,currRectY];
 
             //alert(estado); debug
-            console.log(pos); //debug
+
             //alert(Math.random(100,400));
         }
         else if (movingAllowed === 2) { //
@@ -171,12 +198,14 @@
     }
 
 
+
     function drawMazeAndRectangle(rectX, rectY) {
         makeWhite(0, 0, canvas.width, canvas.height);
         var mazeImg = new Image();
         mazeImg.onload = function () { // cuando se dibuja el laberinto, crear rectangulo y circulo
             context.drawImage(mazeImg, 0, 0);
             drawRectangle(rectX, rectY, "#0000FF", false, true);
+            //drawLine(rectX,rectX), "#333", false, true;
             context.beginPath();
             context.arc(542, 122, 7, 0, 2 * Math.PI, false);
             context.closePath();
@@ -196,7 +225,32 @@
         context.fillStyle = style;
         context.fill();
     }
+/*
+    function drawLine(){
+        $(document).ready(function() {
+            $("#btn1").click(function () {
+                //   $("svg").append('<line x1="0" y1="0" x2="200" y2="200" style="stroke:rgb(255,0,0,1);stroke-width:2" />' );
+                console.log("done!");
 
+                var newLine = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                newLine.setAttribute('id', 'line2');
+                newLine.setAttribute('x1', arr[0].x);
+                newLine.setAttribute('y1', arr[0].y);
+                if(arr[1].x != null) {
+                    newLine.setAttribute('x2', arr[1].x);
+                    newLine.setAttribute('y2', arr[1].y);
+                }
+                else {
+                    newLine.setAttribute('x2', arr[0].x);
+                    newLine.setAttribute('y2', arr[0].y);
+                }
+                newLine.setAttribute('stroke', 'black');
+                $('svg').append('newLine');
+            });
+        });
+        console.log(arr[0].x);
+    }
+*/
     function canMoveTo(destX, destY) {
         var imgData = context.getImageData(destX, destY, 15, 15);
         var data = imgData.data;
@@ -217,12 +271,17 @@
             canMove = 0;
         }
         return canMove;
-
-
-
     }
+
+
 
     drawMazeAndRectangle(425,6); // { 425, 3 } posicion de rectangulo
     window.addEventListener("keydown", moveRect, true);
 </script>
+<svg  width="500" height="400">
+</svg>
+<button id="btn1">Append text</button>
+<button id="left-btn">&larr;</button>
+<button id="right-btn">&rarr;</button>
+</body>
 </html>

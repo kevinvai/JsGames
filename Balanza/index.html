@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-   <script src ="../bower_components/Matter/build/matter.min.js"></script>
+    <script src ="../bower_components/Matter/build/matter.min.js"></script>
     <script src ="../bower_components/Matter/build/matter.js"></script>
     <meta charset="UTF-8">
     <title>Balanza</title>
 
+
+
 </head>
 <body>
 
-</body>
+
 <script>
             var Engine = Matter.Engine,
             Render = Matter.Render,
@@ -49,10 +51,57 @@
         Runner.run(runner, engine);
 
         // add bodies
+            /* Body.set(body, {
+                axes: options.axes || body.axes,
+                area: options.area || body.area,
+                mass: options.mass || body.mass,
+                inertia: options.inertia || body.inertia
+            });
 
-        var stack = Composites.stack(170, 255, 1, 4, 0, 0, function (x, y) { //distancia en x,y,?,iteraciones,?,?
+            /**
+             * Sets the mass of the body. Inverse mass and density are automatically updated to reflect the change.
+             * @method setMass
+             * @param {body} body
+             * @param {number} mass
+             */
+
+            /**
+             * Sets the body as static, including isStatic flag and setting mass and inertia to Infinity.
+             * @method setStatic
+             * @param {body} body
+             * @param {bool} isStatic
+             */
+            Bodies.setStatic = function(body, isStatic) {
+                for (var i = 0; i < body.parts.length; i++) {
+                    var part = body.parts[i];
+                    part.isStatic = isStatic;
+
+                    if (isStatic) {
+                        part.restitution = 0;
+                        part.friction = 1;
+                        part.mass = part.inertia = part.density = Infinity;
+                        part.inverseMass = part.inverseInertia = 0;
+                        part.positionPrev.x = part.position.x;
+                        part.positionPrev.y = part.position.y;
+                        part.anglePrev = part.angle;
+                        part.angularVelocity = 0;
+                        part.speed = 0;
+                        part.angularSpeed = 0;
+                        part.motion = 0;
+                    }
+                }
+            };
+
+            Bodies.setMass = function(body, mass) {
+                body.mass = mass;
+                body.inverseMass = 1 / body.mass;
+                body.density = body.mass / body.area;
+            };
+
+        var stack = Composites.stack(80, 255, 1, 4, 0, 0, function (x, y) { //distancia en x,y,?,iteraciones,?,?
             return Bodies.rectangle(x, y, 30, 30);
             return bodyA.friction(1); //se deslizan mas lento los objetos.
+            return bodyA.mass(1);
         });
 
         var catapult = Bodies.rectangle(400, 520, 320, 20);
@@ -114,10 +163,27 @@
 
 
 
+            var buttons = document.getElementsByTagName("button");
+            var buttonsCount = buttons.length;
+            for (var i = 0; i <= buttonsCount; i += 1) {
+                buttons[i].onclick = function (e) {
+                    alert(this.id);
+                };
+            }
+
+
 
         // context for MatterTools.Demo
 
     //alert("entrooooo");
 </script>
+
+
 <p style="align-content: center">¿Que objeto pesa más?</p>
+<button style="width: 100px; height: 50px;" onclick="" id="1">A</button>
+<button style="width: 100px; height: 50px;" id="2">B</button>
+
+
+
+</body>
 </html>
