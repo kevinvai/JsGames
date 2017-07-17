@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script src ="../bower_components/Matter/build/matter.min.js"></script>
-    <script src ="../bower_components/Matter/build/matter.js"></script>
-    <meta charset="UTF-8">
-    <title>Balanza</title>
 
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Balanza</title>
 
 
 </head>
 <body>
-
-
+<link href="css/bootstrap.min.css" rel="stylesheet">
 <script>
+
             var Engine = Matter.Engine,
             Render = Matter.Render,
             Runner = Matter.Runner,
@@ -26,8 +26,8 @@
         // create engine
         var engine = Engine.create(),
             world = engine.world;
-            //engine.world.gravity.y = 0;  modificacion de gravedad
-            //engine.world.gravity.x = 0;
+        //engine.world.gravity.y = 0;  modificacion de gravedad
+        //engine.world.gravity.x = 0;
 
         // create renderer
         var render = Render.create({
@@ -51,7 +51,7 @@
         Runner.run(runner, engine);
 
         // add bodies
-            /* Body.set(body, {
+        /* Body.set(body, {
                 axes: options.axes || body.axes,
                 area: options.area || body.area,
                 mass: options.mass || body.mass,
@@ -66,12 +66,18 @@
              */
 
             /**
-             * Sets the body as static, including isStatic flag and setting mass and inertia to Infinity.
-             * @method setStatic
+             * Sets the body as static, including
+             isStatic flag and setting
+             mass and inertia to
+             Infinity.
+             *
+             @method setStatic
              * @param {body} body
              * @param {bool} isStatic
              */
-            Bodies.setStatic = function(body, isStatic) {
+            Bodies.setStatic = function(body,
+                                        isStatic) {
+
                 for (var i = 0; i < body.parts.length; i++) {
                     var part = body.parts[i];
                     part.isStatic = isStatic;
@@ -82,8 +88,9 @@
                         part.mass = part.inertia = part.density = Infinity;
                         part.inverseMass = part.inverseInertia = 0;
                         part.positionPrev.x = part.position.x;
-                        part.positionPrev.y = part.position.y;
-                        part.anglePrev = part.angle;
+                        part.positionPrev.y = part
+                            .position.y
+                        ;part.anglePrev = part.angle;
                         part.angularVelocity = 0;
                         part.speed = 0;
                         part.angularSpeed = 0;
@@ -103,7 +110,6 @@
             return bodyA.friction(1); //se deslizan mas lento los objetos.
             return bodyA.mass(1);
         });
-
         var catapult = Bodies.rectangle(400, 520, 320, 20);
 
         World.add(world, [
@@ -132,7 +138,9 @@
 
         // add mouse control
         var mouse = Mouse.create(render.canvas),
-            mouseConstraint = MouseConstraint.create(engine, {
+            mouseConstraint = MouseConstraint.create(engine,
+
+                {
                 mouse: mouse,
                 constraint: {
                     stiffness: 0.5,
@@ -141,20 +149,18 @@
                     }
                 }
             });
-
         World.add(world, mouseConstraint);
 
-       /* World.add(world, [
+
+        /* World.add(world, [
             // walls
             Bodies.rectangle(400, 0, 800, 50, {isStatic: true}),
             Bodies.rectangle(400, 600, 800, 50, {isStatic: true}),
             Bodies.rectangle(800, 300, 50, 600, {isStatic: true}),
             Bodies.rectangle(0, 300, 50, 600, {isStatic: true})
         ]);*/
-
         // keep the mouse in sync with rendering
         render.mouse = mouse;
-
         // fit the render viewport to the scene
         Render.lookAt(render, {
             min: {x: 0, y: 0},
@@ -171,19 +177,22 @@
                 };
             }
 
-
-
-        // context for MatterTools.Demo
+            // context for MatterTools.Demo
 
     //alert("entrooooo");
 </script>
 
 
 <p style="align-content: center">¿Que objeto pesa más?</p>
-<button style="width: 100px; height: 50px;" onclick="" id="1">A</button>
-<button style="width: 100px; height: 50px;" id="2">B</button>
+<!--<button class="centered"style="width: 100px; height: 50px;" onclick="" id="1">A</button>
+<button id="2" class="centered" style="width: 100px; height: 50px;">B</button>-->
+<button id="" class="centered" style="width: 100px; height: 50px;" onclick="location.reload()">B</button>
 
-
+<!--librerias-->
+<script src ="../bower_components/Matter/build/matter.min.js"></script>
+<script src ="../bower_components/Matter/build/matter.js"></script>
+<script src ="../bower_components/jquery/dist/jquery.min.js"></script>
+<script src ="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 
 </body>
 </html>

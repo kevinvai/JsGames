@@ -1,0 +1,51 @@
+
+.canvas_container {
+    width: 500px;
+    border: 1px solid #aaa;
+}
+
+.background{
+
+    background-color: blue;
+}
+
+.background2{
+
+    background-color: black;
+}
+
+.centered {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    /* bring your own prefixes */
+    transform: translate(-50%, -50%);
+}
+
+.centered2 {
+    position: fixed;
+    top: 50%;
+    left: 40%;
+    /* bring your own prefixes */
+    transform: translate(-50%, -50%);
+}
+
+#wrapper{
+
+    background-color: #088A29;
+}
+
+.buttonMovement{
+
+    padding:100px;
+    position: fixed;
+
+    top:50px;
+}
+
+.buttonOptions{
+
+    position: fixed;
+    left: 40px;
+
+}

@@ -1,43 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
-    <script src="../bower_components/jquery/dist/jquery.js"></script>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="../bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
     <title>Here is the  MAZEE</title>
-    <style>
-
-
-
-        .canvas_container {
-            width: 500px;
-            border: 1px solid #aaa;
-        }
-
-        .background{
-
-            background-color: blue;
-        }
-
-        .background2{
-
-            background-color: black;
-        }
-
-
-
-
-
-    </style>
 </head>
+
 <body>
-<div class="background">
-
-</div>
-
-
-
-<p>Termina el laberinto movienedo el cuadro azul con las teclas W - mover hacia arriba, A - mover a la izquierda, S - mover hacia abajo, D - mover a la derecha</p>
+<div id="wrapper" class="container">
+    <p>Termina el laberinto movienedo el cuadro azul con las teclas: <br> W - mover hacia arriba, A - mover a la izquierda, S - mover hacia abajo, D - mover a la derecha</p>
 <!--
 <div>
 <table>
@@ -56,177 +29,176 @@
 </table>
 </div>
 -->
-<canvas width="616" height="556" id="mazecanvas">Tu navegador no soporta html5.
-</canvas>
+<canvas width="616" height="556" id="mazecanvas">Tu navegador no soporta html5.</canvas>
 <noscript>Js no activo aqui.</noscript>
-<script>
-    var canvas = document.getElementById("mazecanvas");
-    var context = canvas.getContext("2d");
-    var currRectX = 425;
-    var currRectY = 3;
-    var mazeWidth = 556;
-    var mazeHeight = 556;
-    var pos = [];
-    var arr = []; //guarda posicion de donde se movio el cubo para saber a donde se movió el usuario
-    var intervalVar;
+
+    <script>
+    function easyMode() {
+        var canvas = document.getElementById("mazecanvas");
+        var context = canvas.getContext("2d");
+        var currRectX = 425;
+        var currRectY = 3;
+        var mazeWidth = 556;
+        var mazeHeight = 556;
+        var pos = [];
+        var arr = []; //guarda posicion de donde se movio el cubo para saber a donde se movió el usuario
+        var intervalVar;
 
 
-    function makeWhite(x, y, w, h) {
-        context.beginPath();
-        context.rect(x, y, w, h);
-        context.closePath();
-        context.fillStyle = "white";
-        context.fill();
-    }
-
-    function moveRect(e) {
-        var estado = new Boolean(false); //variable para saber si el usuario terminó o no el laberinto
-        var newX;
-        var newY;
-        var canMove; // ni idea que hacia esto.
-        e = e || window.event;
-        moveA = 22; //1
-        moveB = 22; //22
-        var angle = 0;
-        switch (e.keyCode) {
-            case 38:   // upkey
-                newX = currRectX;
-                newY = currRectY - moveA;
-                angle = 90;
-                break;
-            case 87: // W key
-                newX = currRectX;
-                newY = currRectY - moveB;
-                angle = 90;
-                break;
-            case 37: // leftkey
-                newX = currRectX - moveA;
-                newY = currRectY;
-                angle = 180;
-                break;
-            case 65: // A key
-                newX = currRectX - moveB;
-                newY = currRectY;
-                angle = 180;
-                break;
-            case 40: // downkey
-                newX = currRectX;
-                newY = currRectY + moveA;
-                angle = 270;
-                break;
-            case 83: // S key
-                newX = currRectX;
-                newY = currRectY + moveB;
-                angle = 270;
-                break;
-            case 39: //rightkey
-                newX = currRectX + moveA;
-                newY = currRectY;
-                break;
-            case 68: // D key
-                newX = currRectX + moveB;
-                newY = currRectY;
-                break;
-            default:
-                return;
-        }
-
-        var colisionX = 0;
-        var colisionY = 0;
-        if(angle == 0){
-            colisionX = 10; //-X
-        }
-        else if (angle == 90){
-            colisionY = -10 // -Y
-        }
-        else if (angle == 180){
-            colisionX = -10; //-X
-        }
-        else if (angle == 270){
-            colisionY = 10 // Y
-        }
-
-
-        pos = ( newY);
-        console.log(pos);
-        arr.push({ x : newX, y : newY });
-
-
-
-
-        movingAllowed = canMoveTo(newX-colisionX, newY-colisionY);
-        if (movingAllowed === 1) {
-            drawRectangle(newX,newY, "#0000FF");
-            //drawLine();
-            //console.log( "old: "+currRectX+","+currRectY+" - "+difX+"_"+difY );
-            alert(currRectY);
-            $(document).ready(function() {
-                $("#btn1").click(function () {
-
-
-                    var newLine = document.createElementNS('canvas', 'line');
-                    newLine.setAttribute('id', 'line2');
-                    newLine.setAttribute('x1', newX);
-                    newLine.setAttribute('y1', newY);
-                    newLine.setAttribute('x2', parseInt(currRectX));
-                    newLine.setAttribute('y2', parseInt(currRectY));
-                    newLine.setAttribute('stroke', 'black');
-                    $('svg').append('newLine');
-                });
-            });
-
-            currRectX = newX;
-            currRectY = newY;
-            estado === false; //false siginifica que no terminó el laberinto
-
-            //alert(estado); debug
-
-            //alert(Math.random(100,400));
-        }
-        else if (movingAllowed === 2) { //
-            //clearInterval(intervalVar);
-            makeWhite(0, 0, canvas.width, canvas.height);
-            context.font = "40px Arial";
-            context.fillStyle = "green";
-            context.textAlign = "center";
-            context.textBaseline = "middle";
-            context.fillText("¡Terminaste!", canvas.width / 2, canvas.height / 2);
-            estado === true; //true significa que terminó el laberinto
-            window.removeEventListener("keydown", moveRect, true);
-            //alert(estado); debug
-        }
-    }
-
-
-
-    function drawMazeAndRectangle(rectX, rectY) {
-        makeWhite(0, 0, canvas.width, canvas.height);
-        var mazeImg = new Image();
-        mazeImg.onload = function () { // cuando se dibuja el laberinto, crear rectangulo y circulo
-            context.drawImage(mazeImg, 0, 0);
-            drawRectangle(rectX, rectY, "#0000FF", false, true);
-            //drawLine(rectX,rectX), "#333", false, true;
+        function makeWhite(x, y, w, h) {
             context.beginPath();
-            context.arc(542, 122, 7, 0, 2 * Math.PI, false);
+            context.rect(x, y, w, h);
             context.closePath();
-            context.fillStyle = '#00FF00';
+            context.fillStyle = "white";
             context.fill();
-            alert("Utiliza las teclas w - arriba, a - izquierda, s - abajo, d - derecha");
-        };
-        mazeImg.src = "Tesis.gif";
-    }
-    function drawRectangle(x, y, style) {
-        makeWhite(currRectX, currRectY, 15, 15);
-        currRectX = x;
-        currRectY = y;
-        context.beginPath();
-        context.rect(x, y, 15, 15);
-        context.closePath();
-        context.fillStyle = style;
-        context.fill();
-    }
-/*
-    function drawLine(){
+        }
+
+        function moveRect(e) {
+            var estado = new Boolean(false); //variable para saber si el usuario terminó o no el laberinto
+            var newX;
+            var newY;
+            var canMove; // ni idea que hacia esto.
+            e = e || window.event;
+            moveA = 22; //1
+            moveB = 22; //22
+            var angle = 0;
+            switch (e.keyCode) {
+                case 38:   // upkey
+                    newX = currRectX;
+                    newY = currRectY - moveA;
+                    angle = 90;
+                    break;
+                case 87: // W key
+                    newX = currRectX;
+                    newY = currRectY - moveB;
+                    angle = 90;
+                    break;
+                case 37: // leftkey
+                    newX = currRectX - moveA;
+                    newY = currRectY;
+                    angle = 180;
+                    break;
+                case 65: // A key
+                    newX = currRectX - moveB;
+                    newY = currRectY;
+                    angle = 180;
+                    break;
+                case 40: // downkey
+                    newX = currRectX;
+                    newY = currRectY + moveA;
+                    angle = 270;
+                    break;
+                case 83: // S key
+                    newX = currRectX;
+                    newY = currRectY + moveB;
+                    angle = 270;
+                    break;
+                case 39: //rightkey
+                    newX = currRectX + moveA;
+                    newY = currRectY;
+                    break;
+                case 68: // D key
+                    newX = currRectX + moveB;
+                    newY = currRectY;
+                    break;
+                default:
+                    return;
+            }
+
+            var colisionX = 0;
+            var colisionY = 0;
+            if (angle == 0) {
+                colisionX = 10; //-X
+            }
+            else if (angle == 90) {
+                colisionY = -10 // -Y
+            }
+            else if (angle == 180) {
+                colisionX = -10; //-X
+            }
+            else if (angle == 270) {
+                colisionY = 10 // Y
+            }
+
+
+            pos = ( newY);
+            console.log(pos);
+            arr.push({x: newX, y: newY});
+
+
+            movingAllowed = canMoveTo(newX - colisionX, newY - colisionY);
+            if (movingAllowed === 1) {
+                drawRectangle(newX, newY, "#0000FF");
+                //drawLine();
+                //console.log( "old: "+currRectX+","+currRectY+" - "+difX+"_"+difY );
+                //alert(currRectY);
+                $(document).ready(function () {
+                    $("#btn1").click(function () {
+
+
+                        var newLine = document.createElementNS('canvas', 'line');
+                        newLine.setAttribute('id', 'line2');
+                        newLine.setAttribute('x1', newX);
+                        newLine.setAttribute('y1', newY);
+                        newLine.setAttribute('x2', parseInt(currRectX));
+                        newLine.setAttribute('y2', parseInt(currRectY));
+                        newLine.setAttribute('stroke', 'black');
+                        $('svg').append('newLine');
+                    });
+                });
+
+                currRectX = newX;
+                currRectY = newY;
+                estado === false; //false siginifica que no terminó el laberinto
+
+                //alert(estado); debug
+
+                //alert(Math.random(100,400));
+            }
+            else if (movingAllowed === 2) { //
+                //clearInterval(intervalVar);
+                makeWhite(0, 0, canvas.width, canvas.height);
+                context.font = "40px Arial";
+                context.fillStyle = "green";
+                context.textAlign = "center";
+                context.textBaseline = "middle";
+                context.fillText("¡Terminaste!", canvas.width / 2, canvas.height / 2);
+                estado === true; //true significa que terminó el laberinto
+                window.removeEventListener("keydown", moveRect, true);
+                //alert(estado); debug
+            }
+        }
+
+
+        function drawMazeAndRectangle(rectX, rectY) {
+            makeWhite(0, 0, canvas.width, canvas.height);
+            var mazeImg = new Image();
+            mazeImg.onload = function () { // cuando se dibuja el laberinto, crear rectangulo y circulo
+                context.drawImage(mazeImg, 0, 0);
+                drawRectangle(rectX, rectY, "#0000FF", false, true);
+                //drawLine(rectX,rectX), "#333", false, true;
+                context.beginPath();
+                context.arc(542, 122, 7, 0, 2 * Math.PI, false);
+                context.closePath();
+                context.fillStyle = '#00FF00';
+                context.fill();
+                alert("Utiliza las teclas w - arriba, a - izquierda, s - abajo, d - derecha");
+            };
+            mazeImg.src = "Tesis.gif";
+        }
+
+        function drawRectangle(x, y, style) {
+            makeWhite(currRectX, currRectY, 15, 15);
+            currRectX = x;
+            currRectY = y;
+            context.beginPath();
+            context.rect(x, y, 15, 15);
+            context.closePath();
+            context.fillStyle = style;
+            context.fill();
+        }
+
+        /*function drawLine(){
         $(document).ready(function() {
             $("#btn1").click(function () {
                 //   $("svg").append('<line x1="0" y1="0" x2="200" y2="200" style="stroke:rgb(255,0,0,1);stroke-width:2" />' );
@@ -251,18 +223,42 @@
         console.log(arr[0].x);
     }
 */
-    function canMoveTo(destX, destY) {
-        var imgData = context.getImageData(destX, destY, 15, 15);
+        function canMoveTo(destX,
+                           destY) {
+        var imgData = context.getImageData(destX,
+            destY, 15, 15);
         var data = imgData.data;
-        var canMove = 1; // 1 = se puede mover
-        if (destX >= 0 && destX <= mazeWidth - 15 && destY >= 0 && destY <= mazeHeight - 15) { // revisar si el rectangulo se mueve en el canvas
-            for (var i = 0; i < 4 * 15 * 15; i += 4) { //check a todos los pixeles
-                if (data[i] === 0 && data[i + 1] === 0 && data[i + 2] === 0) { // black
-                    canMove = 0; // 0 = el rectangulo no se puede mover
+        var canMove =
+            1; // 1 = se puede mover
+        if (destX >= 0 &&
+            destX <= mazeWidth -
+            15 && destY >= 0 && destY <= mazeHeight - 15) {
+            // revisar si el rectangulo se mueve en el canvas
+            for (var i = 0; i < 4
+            *
+            15 * 15; i += 4) { //check a todos los pixeles
+                if (data[
+                        i
+                        ] === 0 && data[i + 1] === 0 &&
+                    data[i + 2] === 0) { // black
+                    canMove
+                        = 0;
+
+
+                    // 0 = el rectangulo no se puede mover
                     break;
                 }
-                else if (data[i] === 0 && data[i + 1] === 255 && data[i + 2] === 0) { // lime: #00FF00
+                else if (data[
+                        i] === 0
+                    && data[i
+                    +
+                    1] === 255
+                    &&
+
+
+                    data[i + 2] === 0) { // lime: #00FF00
                     canMove = 2; // 2 = se termino el laberinto
+
                     break;
                 }
             }
@@ -277,11 +273,262 @@
 
     drawMazeAndRectangle(425,6); // { 425, 3 } posicion de rectangulo
     window.addEventListener("keydown", moveRect, true);
+
+}
+
+   function hardMode() {
+       var canvas = document.getElementById("mazecanvas");
+       var context = canvas.getContext("2d");
+       var currRectX = 425;
+       var currRectY = 3;
+       var mazeWidth = 556;
+       var mazeHeight = 556;
+       var pos = [];
+       var arr = []; //guarda posicion de donde se movio el cubo para saber a donde se movió el usuario
+       var intervalVar;
+
+
+       function makeWhite(x, y, w, h) {
+           context.beginPath();
+           context.rect(x, y, w, h);
+           context.closePath();
+           context.fillStyle = "white";
+           context.fill();
+       }
+
+       function moveRect(e) {
+           var estado = new Boolean(false); //variable para saber si el usuario terminó o no el laberinto
+           var newX;
+           var newY;
+           var canMove; // ni idea que hacia esto.
+           e = e || window.event;
+           moveA = 15; //1
+           moveB = 15; //22
+           var angle = 0;
+           switch (e.keyCode) {
+               case 38:   // upkey
+                   newX = currRectX;
+                   newY = currRectY - moveA;
+                   angle = 90;
+                   break;
+               case 87: // W key
+                   newX = currRectX;
+                   newY = currRectY - moveB;
+                   angle = 90;
+                   break;
+               case 37: // leftkey
+                   newX = currRectX - moveA;
+                   newY = currRectY;
+                   angle = 180;
+                   break;
+               case 65: // A key
+                   newX = currRectX - moveB;
+                   newY = currRectY;
+                   angle = 180;
+                   break;
+               case 40: // downkey
+                   newX = currRectX;
+                   newY = currRectY + moveA;
+                   angle = 270;
+                   break;
+               case 83: // S key
+                   newX = currRectX;
+                   newY = currRectY + moveB;
+                   angle = 270;
+                   break;
+               case 39: //rightkey
+                   newX = currRectX + moveA;
+                   newY = currRectY;
+                   break;
+               case 68: // D key
+                   newX = currRectX + moveB;
+                   newY = currRectY;
+                   break;
+               default:
+                   return;
+           }
+
+           var colisionX = 0;
+           var colisionY = 0;
+           if (angle == 0) {
+               colisionX = 10; //-X
+           }
+           else if (angle == 90) {
+               colisionY = -10 // -Y
+           }
+           else if (angle == 180) {
+               colisionX = -10; //-X
+           }
+           else if (angle == 270) {
+               colisionY = 10 // Y
+           }
+
+
+           pos = ( newY);
+           console.log(pos);
+           arr.push({x: newX, y: newY});
+
+
+           movingAllowed = canMoveTo(newX - colisionX, newY - colisionY);
+           if (movingAllowed === 1) {
+               drawRectangle(newX, newY, "#0000FF");
+               //drawLine();
+               //console.log( "old: "+currRectX+","+currRectY+" - "+difX+"_"+difY );
+
+               $(document).ready(function () {
+                   $("#btn1").click(function () {
+
+
+                       var newLine = document.createElementNS('canvas', 'line');
+                       newLine.setAttribute('id', 'line2');
+                       newLine.setAttribute('x1', newX);
+                       newLine.setAttribute('y1', newY);
+                       newLine.setAttribute('x2', parseInt(currRectX));
+                       newLine.setAttribute('y2', parseInt(currRectY));
+                       newLine.setAttribute('stroke', 'black');
+                       $('svg').append('newLine');
+                   });
+               });
+
+               currRectX = newX;
+               currRectY = newY;
+               estado === false; //false siginifica que no terminó el laberinto
+
+               //alert(estado); debug
+
+               //alert(Math.random(100,400));
+           }
+           else if (movingAllowed === 2) { //
+               //clearInterval(intervalVar);
+               makeWhite(0, 0, canvas.width, canvas.height);
+               context.font = "40px Arial";
+               context.fillStyle = "green";
+               context.textAlign = "center";
+               context.textBaseline = "middle";
+               context.fillText("¡Terminaste!", canvas.width / 2, canvas.height / 2);
+               estado === true; //true significa que terminó el laberinto
+               window.removeEventListener("keydown", moveRect, true);
+               //alert(estado); debug
+           }
+       }
+
+
+       function drawMazeAndRectangle(rectX, rectY) {
+           makeWhite(0, 0, canvas.width, canvas.height);
+           var mazeImg = new Image();
+           mazeImg.onload = function () { // cuando se dibuja el laberinto, crear rectangulo y circulo
+               context.drawImage(mazeImg, 0, 0);
+               drawRectangle(rectX, rectY, "#0000FF", false, true);
+               //drawLine(rectX,rectX), "#333", false, true;
+               context.beginPath();
+               context.arc(442, 122, 7, 0, 2 * Math.PI, false);
+               context.closePath();
+               context.fillStyle = '#00FF00';
+               context.fill();
+               alert("Utiliza las teclas w - arriba, a - izquierda, s - abajo, d - derecha");
+           };
+           mazeImg.src = "tesis2.gif";
+       }
+
+       function drawRectangle(x, y, style) {
+           makeWhite(currRectX, currRectY, 15, 15);
+           currRectX = x;
+           currRectY = y;
+           context.beginPath();
+           context.rect(x, y, 15, 15);
+           context.closePath();
+           context.fillStyle = style;
+           context.fill();
+       }
+
+       /*
+         function drawLine(){
+         $(document).ready(function() {
+         $("#btn1").click(function () {
+         //   $("svg").append('<line x1="0" y1="0" x2="200" y2="200" style="stroke:rgb(255,0,0,1);stroke-width:2" />' );
+         console.log("done!");
+
+         var newLine = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+         newLine.setAttribute('id', 'line2');
+         newLine.setAttribute('x1', arr[0].x);
+         newLine.setAttribute('y1', arr[0].y);
+         if(arr[1].x != null) {
+         newLine.setAttribute('x2', arr[1].x);
+         newLine.setAttribute('y2', arr[1].y);
+         }
+         else {
+         newLine.setAttribute('x2', arr[0].x);
+         newLine.setAttribute('y2', arr[0].y);
+         }
+         newLine.setAttribute('stroke', 'black');
+         $('svg').append('newLine');
+         });
+         });
+         console.log(arr[0].x);
+         }
+         */
+        function canMoveTo(destX, destY) {
+            var imgData = context.getImageData(destX, destY, 15, 15);
+            var data = imgData.data;
+            var canMove = 1;
+            // 1 = se puede mover
+            if (destX >= 0 &&
+                destX <= mazeWidth
+                - 15 && destY >= 0 && destY <= mazeHeight - 15) {
+                // revisar si el rectangulo se mueve en el canvas
+                for (var i = 0; i < 4
+                * 15 * 15; i += 4) {
+                    //check a todos los pixeles
+                    if (data[i
+                            ] === 0 &&
+                        data[i + 1] === 0 && data[i + 2] === 0) { // black
+                        canMove = 0;
+                        // 0 = el rectangulo no se puede mover
+                        break;
+                    }
+                    else if (data[
+                            i] === 0
+                        && data[i
+                        +
+                        1] === 255
+                        &&
+
+
+                        data[i + 2] === 0) {
+                        // lime: #00FF00
+                        canMove = 2;
+                        // 2 = se termino el laberinto
+                        break;
+                    }
+                }
+            }
+            else {
+                canMove = 0;
+            }
+            return canMove;
+        }
+
+
+
+        drawMazeAndRectangle(340,22); //posicion de rectangulo
+        window.addEventListener("keydown", moveRect, true);
+   }
+    /*var divOne = document.getElementById('1');
+    divOne.style.display='none'*/
 </script>
 <svg  width="500" height="400">
 </svg>
-<button id="btn1">Append text</button>
-<button id="left-btn">&larr;</button>
-<button id="right-btn">&rarr;</button>
+    <button id="movement" class="buttonMovement" onclick="moveRect()">AAAH</button>
+</div>
+
+<button class="centered" style="width: 100px; height: 50px;" onclick="easyMode()">Modo facil</button>
+<button class="centered2 "style="width: 100px; height: 50px;" onclick="hardMode()">Modo dificil</button>
+<button class="centered2 "style="width: 100px; height: 50px;" onclick="location.reload()">reset</button>
+
+
+<!--librerias-->
+<script src="../bower_components/jquery/dist/jquery.min.js"></script>
+<script src="../bower_components/jquery/dist/jquery.js"></script>
+<script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 </body>
 </html>
