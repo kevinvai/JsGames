@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <title>prueba</title>
+</head>
+<body>
+<script>
+
+    // walls
+
+    World.add(world, [
+
+        Bodies.rectangle(400, 0, 800, 50, { isStatic: true }),
+        Bodies.rectangle(400, 600, 800, 50, { isStatic: true }),
+        Bodies.rectangle(800, 300, 50, 600, { isStatic: true }),
+        Bodies.rectangle(0, 300, 50, 600, { isStatic: true })
+    ]);
+
+
+</script>
+<script>
+    /*
+     $('#left-btn').click(function() {
+     //agregar botones tactiles para movimiento
+     var newX;
+     var newY;
+     var canMove; // ni idea que hacia esto.
+     e = e || window.event;
+     moveA = 22; //1
+     moveB = 22; //22
+     var angle = 0;
+     switch (e.keyCode) {
+
+     case 37: // leftkey
+     newX = currRectX - moveA;
+     newY = currRectY;
+     angle = 180;
+     break;
+     case 65: // A key
+     newX = currRectX - moveB;
+     newY = currRectY;
+     angle = 180;
+     break;
+     default:
+     return;
+     var colisionX = 0;
+     var colisionY = 0;
+     if(angle == 0){
+     colisionX = 10; //-X
+     }
+     else if (angle == 90){
+     colisionY = -10 // -Y
+     }
+     else if (angle == 180){
+     colisionX = -10; //-X
+     }
+     else if (angle == 270){
+     colisionY = 10 // Y
+     }
+
+
+     //console.log( "old: "+currRectX+","+currRectY+" - "+difX+"_"+difY );
+
+     currRectX = newX;
+     currRectY = newY;
+     //alert(estado); debug
+     console.log(pos)//debug
+     //alert(Math.random(100,400));
+
+     else if (movingAllowed === 2) { //
+     //clearInterval(intervalVar);
+     makeWhite(0, 0, canvas.width, canvas.height);
+     context.font = "40px Arial";
+     context.fillStyle = "green";
+     context.textAlign = "center";
+     context.textBaseline = "middle";
+     context.fillText("¡Terminaste!", canvas.width / 2, canvas.height / 2);
+     estado === true; //true significa que terminó el laberinto
+     window.removeEventListener("keydown", moveRect, true);
+     //alert(estado); debug
+     }
+     };
+
+
+     });
+
+</body>
+</html>
