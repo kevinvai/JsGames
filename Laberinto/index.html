@@ -1,39 +1,459 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Here is the  MAZEE</title>
     <style>
+        a {
+            color: #D55307; }
 
-        table {
-            border-collapse: collapse;
-            border-width: 20px;
-            width: 100%;
-        }
+        body {
+            overflow-x: hidden; }
+        body.noscroll {
+            overflow: hidden;
+            margin-bottom: 510px; }
+        .boton-downloadAlcance {
+            margin-left: 310%; }
 
-        th, td {
+        .boton-verAlcance {
+            margin-left: 210%; }
+
+        .boton-editarAlcance {
+            margin-left: 110%; }
+
+        .boton-eliminarAlcance {
+            background: none !important; }
+
+        .botonAlcance {
+            color: #777; }
+
+        .botonAlcance:hover {
+            color: #D55307; }
+
+        .btn-modal {
+            background: #E48030;
+            color: #FFF; }
+        .btn-modal:hover {
+            background: #D55307;
+            color: #FFF; }
+        .btn-modal:focus {
+            background: #D55307;
+            color: #FFF;
+            outline: none; }
+
+        #page-wrapper {
+            padding-bottom: 50px; }
+
+        .cuadro-proyectos {
+            border: 1px solid #e7e7e7;
+            min-height: 400px; }
+
+        .navprobase {
+            border-bottom: 1px solid #E48030; }
+
+        .sidebar-admin {
+            margin-top: -47px; }
+
+        .sidebar-cliente {
+            margin-top: 4px; }
+
+        .gris-rojizo {
+            color: #E48030;
+            margin: 20px 0 50px 0;
             text-align: left;
-            padding: 8px;
-        }
+            font-size: 40px; }
 
+        .gris-rojizo-cliente {
+            color: #E48030;
+            margin: 20px 0 0px 0;
+            text-align: left;
+            font-size: 40px; }
 
-        tr:nth-child(even) {
-            background-color: #f2f2f2
-        }
+        .contenedor-proyecto {
+            border: 2px solid #E48030;
+            padding: 15px 0px 5px 50px;
+            border-radius: 15px;
+            width: 100%; }
 
+        .contenedor-proyecto:hover {
+            transition: .7s;
+            -moz-box-shadow: 0 0 10px #E48030;
+            -webkit-box-shadow: 0 0 10px #E48030;
+            box-shadow: 0 0 10px #E48030;
+            cursor: pointer; }
 
-        th {
-            font-size: small;
-            background-color: white;
+        .titulo-contenedor {
+            color: #E48030;
+            font-size: 19px;
+            font-weight: bold; }
+
+        .direccion-contenedor {
+            color: #737373;
+            font-size: 17px;
+            margin-left: -3%;
+            margin-top: -1%; }
+
+        .icono-mapa {
+            color: #E48030;
+            font-size: 22px; }
+
+        .direccion {
+            margin-left: 7px;
+            color: #999999;
+            font-size: 17px;
+            font-weight: 500; }
+
+        .linea-proyecto {
+            margin-top: 10%;
+            height: 12px;
+            background: #DEDEDE;
+            border-radius: 15px; }
+
+        .navegador-cliente {
+            opacity: 0.9; }
+
+        .porcentaje-proyecto {
+            padding-top: 27px;
+            color: #737373;
+            font-size: 17px; }
+
+        .iconos-clientes {
+            margin-top: 20%;
+            height: 65px; }
+
+        #myBar {
+            width: 50%;
+            height: 100%;
+            background-color: #D55307;
+            border-radius: 15px; }
+
+        .back-img-proyectos {
+            width: 100%;
+            background: url("/assets/img/proyectos/const.jpg") no-repeat;
+            height: 300px;
+            background-size: cover;
+            margin-top: -51px; }
+
+        .pestana-activa {
+            width: 100%;
+            height: 29px;
+            line-height: 30px;
+            background: #E48030;
+            font-weight: 600;
+            color: #fff !important;
+            border-top-left-radius: 18px;
+            border-top-right-radius: 18px;
+            text-align: center;
+            cursor: pointer;
+            margin-right: -15px; }
+        .pestana-activa:hover {
+            background: #D55307; }
+
+        .pestana-nombre {
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            display: block;
+            padding: 2px; }
+
+        .margen-pestana {
+            margin-right: -15px; }
+
+        .titulo-pestana {
+            color: #fff !important;
+            text-decoration: none; }
+        .titulo-pestana:hover {
+            text-decoration: none; }
+
+        .pestana-inactiva {
+            width: 100%;
+            height: 29px;
+            line-height: 30px;
+            background: #9B999E;
+            font-weight: 600;
+            color: #d5d5d5 !important;
+            border-top-left-radius: 18px;
+            border-top-right-radius: 18px;
+            text-align: center;
+            cursor: pointer; }
+        .pestana-inactiva:hover {
+            background: #555555;
+            color: #FFF; }
+
+        .pestana-nuevo {
+            width: 100%;
+            height: 29px;
+            line-height: 30px;
+            background: #C1C0C3;
+            font-weight: 600;
+            color: #fff !important;
+            border-top-left-radius: 18px;
+            border-top-right-radius: 18px;
+            text-align: center;
+            cursor: pointer;
+            margin-left: -15%; }
+        .pestana-nuevo:hover {
+            transition: 1s;
+            background: #ccc; }
+
+        .navbar-brand {
+            padding: 0px; }
+        .navbar-brand > img {
+            height: 100%;
+            padding: 15px;
+            width: auto; }
+        .navbar-brand > img {
+            padding: 12px 15px; }
+
+        .cuadro {
+            margin-top: 30%; }
+
+        .contenedor-links {
+            position: relative;
+            height: 300px; }
+        .contenedor-links:hover a.delete {
+            display: block;
+            opacity: 1;
+            transition: opacity ease-in-out 0.2s; }
+        .contenedor-links:hover a.borrar {
+            display: block;
+            opacity: 1;
+            transition: opacity ease-in-out 0.2s; }
+        .contenedor-links:hover a.edit {
+            position: absolute;
+            display: block;
+            top: 15px;
+            right: 30px;
+            width: calc(17% - 15px);
+            height: 40px !important;
+            text-decoration: none;
+            z-index: 2;
+            opacity: 1;
+            transition: opacity ease-in-out 0.2s;
+            cursor: pointer; }
+        .contenedor-links a.delete {
+            position: absolute;
+            display: block;
+            top: 15px;
+            right: 2px;
+            width: calc(17% - 15px);
+            height: 40px !important;
+            text-decoration: none;
+            z-index: 2;
+            opacity: 0;
+            background: linear-gradient(to bottom, #e48030 0%, rgba(228, 128, 48, 0) 100%);
+            transition: opacity ease-in-out 0.2s; }
+        .contenedor-links a.edit {
+            position: absolute;
+            display: block;
+            top: 15px;
+            right: 2px;
+            width: calc(17% - 15px);
+            height: 40px !important;
+            text-decoration: none;
+            z-index: 2;
+            opacity: 0;
+            transition: opacity ease-in-out 0.2s; }
+        .contenedor-links a.borrar {
+            position: absolute;
+            display: block;
+            top: 15px;
+            left: 15px;
+            width: calc(87.5% - 15px);
+            height: 40px !important;
+            text-decoration: none;
+            z-index: 2;
+            opacity: 0;
+            background: linear-gradient(to bottom, #e48030 0%, rgba(228, 128, 48, 0) 100%);
+            transition: opacity ease-in-out 0.2s; }
+        .contenedor-links a.thumbnail {
+            position: absolute;
+            top: 15px;
+            bottom: 0;
+            left: 15px;
+            right: 0;
+            text-align: center;
+            padding: calc(50% - 45px) 20px 20px 20px;
+            color: #E48030;
+            font-size: 18px;
+            transition: border 0.2s ease-in-out 0s, color 0.2s ease-in-out;
+            border-color: #E48030;
+            border-width: 2px; }
+        .contenedor-links a.thumbnail:hover {
             color: #D55307;
+            border-color: #E48030;
+            border-width: 2px;
+            text-decoration: none; }
+        .contenedor-links p.texto-borrar {
+            color: #FFF;
+            float: right;
+            font-size: 16px;
+            font-weight: bold;
+            margin-top: 12px;
+            margin-right: 10px;
+            margin-bottom: 12px; }
+
+        span.agregar {
+            font-size: 30px;
+            margin-top: 20px; }
+
+        .menu-inicio > ul > li:hover {
+            background: #D55307; }
+        .menu-inicio > ul > li > a:hover {
+            color: #FFF !important; }
+
+        .menu-top > li > a {
+            color: #777;
+            font-size: 14px; }
+        .menu-top > li > a:hover {
+            background: #E48030;
+            color: #FFF; }
+
+        .side-menu > li > a {
+            color: #D55307;
+            font-weight: bold;
+            padding: 15px 10px;
+            transition: color linear 80ms, background linear 80ms; }
+        .side-menu > li > a:hover {
+            background: #D55307;
+            color: #FFF;
+            font-weight: bold;
+            -webkit-animation: moveAndBack 1s ease-in-out;
+            -webkit-animation-direction: alternate;
+            -webkit-animation-iteration-count: 2;
+            -webkit-animation-fill-mode: forwards; }
+        @-webkit-keyframes moveAndBack {
+            0% {
+                -webkit-transform: translate(0); }
+            25% {
+                -webkit-transform: translateX(5px); }
+            100% {
+                -webkit-transform: translateX(5px); } }
+        .side-menu > li > ul > li > a {
+            color: #737373;
+            padding: 15px 10px;
+            transition: color linear 80ms, background linear 80ms; }
+        .side-menu > li > ul > li > a:hover {
+            background: #E48030;
+            color: #FFF; }
+
+        .titulo-alcance {
+            color: #E48030; }
+
+        .textarea-modalAlcance {
+            background-color: #FFF;
+            color: #737373;
+            border: 1px solid #ccc; }
+        .textarea-modalAlcance:focus {
+            border: 1px solid #E48030; }
+
+        .titulo-wbs {
+            color: #FFF; }
+
+        .header-modal {
+            background-color: #E48030;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px; }
+
+        .closedit {
+            color: #FFF !important;
+            opacity: 1 !important;
+            text-shadow: 0px !important; }
+        .closedit:hover {
+            color: #e7e7e7 !important;
+            text-shadow: 0 1px 0 #737373 !important; }
+
+        .margen-wbs {
+            padding: 0 15px; }
+
+        .subtitulo-alcance {
+            color: #737373;
+            font-size: 20px; }
+
+        .tabla-alcance-body tbody tr {
+            border: 1px solid #ccc;
+            color: #777; }
+        .tabla-alcance-body td {
+            padding: 20px; }
+
+        .subtitulo-wbs {
+            color: #737373;
+            font-size: 14px;
+            font-weight: 200; }
+
+        .subtituloWbs {
+            color: #E48030;
+            font-size: 18px; }
+
+        .subtitulo-proyectos {
+            color: #E48030;
+            font-weight: 500; }
+
+        .subtitulo-subentregable {
+            color: #737373 !important;
+            font-size: 14px; }
+
+        .enlace-muroComentarios {
+            color: #737373 !important;
+            font-size: 14px; }
+        .enlace-muroComentarios:hover {
+            text-decoration: none; }
+
+        .subtitulo-foto {
+            color: #737373 !important;
+            font-size: 14px;
+            font-weight: normal; }
+
+        .titulo-entregable {
+            display: block;
+            background-color: #e7e7e7; }
+
+        .panel-entregable {
+            border-color: #D55307; }
+
+        .panel-entregable > .panel-heading {
+            color: #FFF;
+            background-color: #D55307;
+            border-color: #D55307; }
+
+        .panel-entregable > .panel-body {
+            color: #737373; }
+
+        .panel-entregable > .panel-heading + .panel-collapse > .panel-body {
+            border-top-color: #D55307; }
+
+        .panel-entregable > .panel-heading .badge {
+            color: #FFF;
+            background-color: #D55307; }
+
+        .panel-entregable > .panel-footer + .panel-collapse > .panel-body {
+            border-bottom-color: #D55307; }
+
+        .panel-subentregable {
+            border-color: #E48030; }
+
+        .panel-subentregable > .panel-heading {
+            color: #FFF;
+            background-color: #E48030;
+            border-color: #E48030; }
+
+        .panel-subentregable > .panel-body {
+            color: #737373; }
+        #page-wrapper {
+            padding-bottom: 50px;
+            padding-right: 50px;
         }
-
-
-
     </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="../bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
+    <title>Here is the  MAZEE</title>
 </head>
+
 <body>
-<p>Termina el laberinto movienedo el cuadro azul con las teclas W - mover hacia arriba, A - mover a la izquierda, S - mover hacia abajo, D - mover a la derecha</p>
+<div id="page-wrapper" class="container">
+    <div class="row">
+        <div class="col-xs-6 col-sm-3">
+    <p>Termina el laberinto movienedo el cuadro azul con las teclas: <br> W - mover hacia arriba, A - mover a la izquierda, S - mover hacia abajo, D - mover a la derecha</p>
 <!--
 <div>
 <table>
@@ -52,163 +472,236 @@
 </table>
 </div>
 -->
-<canvas width="616" height="556" id="mazecanvas">Tu navegador no soporta html5.</canvas>
+<canvas class="col-xs-6 col-sm-3" width="616" height="556" id="mazecanvas">Tu navegador no soporta html5.</canvas>
 <noscript>Js no activo aqui.</noscript>
-</body>
-<script>
-    var canvas = document.getElementById("mazecanvas");
-    var context = canvas.getContext("2d");
-    var currRectX = 425;
-    var currRectY = 3;
-    var mazeWidth = 556;
-    var mazeHeight = 556;
-    var intervalVar;
+
+    <script>
+    function easyMode() {
+        var canvas = document.getElementById("mazecanvas");
+        var context = canvas.getContext("2d");
+        var currRectX = 425;
+        var currRectY = 3;
+        var mazeWidth = 556;
+        var mazeHeight = 556;
+        var pos = [];
+        var arr = []; //guarda posicion de donde se movio el cubo para saber a donde se movió el usuario
+        var intervalVar;
 
 
-    function makeWhite(x, y, w, h) {
-        context.beginPath();
-        context.rect(x, y, w, h);
-        context.closePath();
-        context.fillStyle = "white";
-        context.fill();
-    }
-
-    function moveRect(e) {
-        var estado = new Boolean(false); //variable para saber si el usuario terminó o no el laberinto
-        var pos = []; //guarda posicion de donde se movio el cubo para saber a donde se movió el usuario
-        var newX;
-        var newY;
-        var canMove; // ni idea que hacia esto.
-        e = e || window.event;
-        moveA = 22; //1
-        moveB = 22; //22
-        var angle = 0;
-        switch (e.keyCode) {
-            case 38:   // upkey
-                newX = currRectX;
-                newY = currRectY - moveA;
-                angle = 90;
-                break;
-            case 87: // W key
-                newX = currRectX;
-                newY = currRectY - moveB;
-                angle = 90;
-                break;
-            case 37: // leftkey
-                newX = currRectX - moveA;
-                newY = currRectY;
-                angle = 180;
-                break;
-            case 65: // A key
-                newX = currRectX - moveB;
-                newY = currRectY;
-                angle = 180;
-                break;
-            case 40: // downkey
-                newX = currRectX;
-                newY = currRectY + moveA;
-                angle = 270;
-                break;
-            case 83: // S key
-                newX = currRectX;
-                newY = currRectY + moveB;
-                angle = 270;
-                break;
-            case 39: //rightkey
-                newX = currRectX + moveA;
-                newY = currRectY;
-                break;
-            case 68: // D key
-                newX = currRectX + moveB;
-                newY = currRectY;
-                break;
-            default:
-                return;
-        }
-
-        var colisionX = 0;
-        var colisionY = 0;
-        if(angle == 0){
-            colisionX = 10; //-X
-        }
-        else if (angle == 90){
-            colisionY = -10 // -Y
-        }
-        else if (angle == 180){
-            colisionX = -10; //-X
-        }
-        else if (angle == 270){
-            colisionY = 10 // Y
-        }
-
-        movingAllowed = canMoveTo(newX-colisionX, newY-colisionY);
-        if (movingAllowed === 1) {
-            drawRectangle(newX,newY, "#0000FF");
-
-            //console.log( "old: "+currRectX+","+currRectY+" - "+difX+"_"+difY );
-
-            currRectX = newX;
-            currRectY = newY;
-            estado === false; //false siginifica que no terminó el laberinto
-            pos = [currRectX,currRectY];
-
-            //alert(estado); debug
-            console.log(pos); //debug
-            //alert(Math.random(100,400));
-        }
-        else if (movingAllowed === 2) { //
-            //clearInterval(intervalVar);
-            makeWhite(0, 0, canvas.width, canvas.height);
-            context.font = "40px Arial";
-            context.fillStyle = "green";
-            context.textAlign = "center";
-            context.textBaseline = "middle";
-            context.fillText("¡Terminaste!", canvas.width / 2, canvas.height / 2);
-            estado === true; //true significa que terminó el laberinto
-            window.removeEventListener("keydown", moveRect, true);
-            //alert(estado); debug
-        }
-    }
-
-
-    function drawMazeAndRectangle(rectX, rectY) {
-        makeWhite(0, 0, canvas.width, canvas.height);
-        var mazeImg = new Image();
-        mazeImg.onload = function () { // cuando se dibuja el laberinto, crear rectangulo y circulo
-            context.drawImage(mazeImg, 0, 0);
-            drawRectangle(rectX, rectY, "#0000FF", false, true);
+        function makeWhite(x, y, w, h) {
             context.beginPath();
-            context.arc(542, 122, 7, 0, 2 * Math.PI, false);
+            context.rect(x, y, w, h);
             context.closePath();
-            context.fillStyle = '#00FF00';
+            context.fillStyle = "white";
             context.fill();
-            alert("Utiliza las teclas w - arriba, a - izquierda, s - abajo, d - derecha");
-        };
-        mazeImg.src = "Tesis.gif";
-    }
-    function drawRectangle(x, y, style) {
-        makeWhite(currRectX, currRectY, 15, 15);
-        currRectX = x;
-        currRectY = y;
-        context.beginPath();
-        context.rect(x, y, 15, 15);
-        context.closePath();
-        context.fillStyle = style;
-        context.fill();
-    }
+        }
 
-    function canMoveTo(destX, destY) {
-        var imgData = context.getImageData(destX, destY, 15, 15);
+        function moveRect(e) {
+            var estado = new Boolean(false); //variable para saber si el usuario terminó o no el laberinto
+            var newX;
+            var newY;
+            var canMove; // ni idea que hacia esto.
+            e = e || window.event;
+            moveA = 22; //1
+            moveB = 22; //22
+            var angle = 0;
+            switch (e.keyCode) {
+                case 38:   // upkey
+                    newX = currRectX;
+                    newY = currRectY - moveA;
+                    angle = 90;
+                    break;
+                case 87: // W key
+                    newX = currRectX;
+                    newY = currRectY - moveB;
+                    angle = 90;
+                    break;
+                case 37: // leftkey
+                    newX = currRectX - moveA;
+                    newY = currRectY;
+                    angle = 180;
+                    break;
+                case 65: // A key
+                    newX = currRectX - moveB;
+                    newY = currRectY;
+                    angle = 180;
+                    break;
+                case 40: // downkey
+                    newX = currRectX;
+                    newY = currRectY + moveA;
+                    angle = 270;
+                    break;
+                case 83: // S key
+                    newX = currRectX;
+                    newY = currRectY + moveB;
+                    angle = 270;
+                    break;
+                case 39: //rightkey
+                    newX = currRectX + moveA;
+                    newY = currRectY;
+                    break;
+                case 68: // D key
+                    newX = currRectX + moveB;
+                    newY = currRectY;
+                    break;
+                default:
+                    return;
+            }
+
+            var colisionX = 0;
+            var colisionY = 0;
+            if (angle == 0) {
+                colisionX = 10; //-X
+            }
+            else if (angle == 90) {
+                colisionY = -10 // -Y
+            }
+            else if (angle == 180) {
+                colisionX = -10; //-X
+            }
+            else if (angle == 270) {
+                colisionY = 10 // Y
+            }
+
+
+            pos = ( newY);
+            console.log(pos);
+            arr.push({x: newX, y: newY});
+
+
+            movingAllowed = canMoveTo(newX - colisionX, newY - colisionY);
+            if (movingAllowed === 1) {
+                drawRectangle(newX, newY, "#0000FF");
+                //drawLine();
+                //console.log( "old: "+currRectX+","+currRectY+" - "+difX+"_"+difY );
+                //alert(currRectY);
+                $(document).ready(function () {
+                    $("#btn1").click(function () {
+
+
+                        var newLine = document.createElementNS('canvas', 'line');
+                        newLine.setAttribute('id', 'line2');
+                        newLine.setAttribute('x1', newX);
+                        newLine.setAttribute('y1', newY);
+                        newLine.setAttribute('x2', parseInt(currRectX));
+                        newLine.setAttribute('y2', parseInt(currRectY));
+                        newLine.setAttribute('stroke', 'black');
+                        $('svg').append('newLine');
+                    });
+                });
+
+                currRectX = newX;
+                currRectY = newY;
+                estado === false; //false siginifica que no terminó el laberinto
+
+                //alert(estado); debug
+
+                //alert(Math.random(100,400));
+            }
+            else if (movingAllowed === 2) { //
+                //clearInterval(intervalVar);
+                makeWhite(0, 0, canvas.width, canvas.height);
+                context.font = "40px Arial";
+                context.fillStyle = "green";
+                context.textAlign = "center";
+                context.textBaseline = "middle";
+                context.fillText("¡Terminaste!", canvas.width / 2, canvas.height / 2);
+                estado === true; //true significa que terminó el laberinto
+                window.removeEventListener("keydown", moveRect, true);
+                //alert(estado); debug
+            }
+        }
+
+
+        function drawMazeAndRectangle(rectX, rectY) {
+            makeWhite(0, 0, canvas.width, canvas.height);
+            var mazeImg = new Image();
+            mazeImg.onload = function () { // cuando se dibuja el laberinto, crear rectangulo y circulo
+                context.drawImage(mazeImg, 0, 0);
+                drawRectangle(rectX, rectY, "#0000FF", false, true);
+                //drawLine(rectX,rectX), "#333", false, true;
+                context.beginPath();
+                context.arc(542, 122, 7, 0, 2 * Math.PI, false);
+                context.closePath();
+                context.fillStyle = '#00FF00';
+                context.fill();
+                alert("Utiliza las teclas w - arriba, a - izquierda, s - abajo, d - derecha");
+            };
+            mazeImg.src = "Tesis.gif";
+        }
+
+        function drawRectangle(x, y, style) {
+            makeWhite(currRectX, currRectY, 15, 15);
+            currRectX = x;
+            currRectY = y;
+            context.beginPath();
+            context.rect(x, y, 15, 15);
+            context.closePath();
+            context.fillStyle = style;
+            context.fill();
+        }
+
+        /*function drawLine(){
+        $(document).ready(function() {
+            $("#btn1").click(function () {
+                //   $("svg").append('<line x1="0" y1="0" x2="200" y2="200" style="stroke:rgb(255,0,0,1);stroke-width:2" />' );
+                console.log("done!");
+
+                var newLine = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                newLine.setAttribute('id', 'line2');
+                newLine.setAttribute('x1', arr[0].x);
+                newLine.setAttribute('y1', arr[0].y);
+                if(arr[1].x != null) {
+                    newLine.setAttribute('x2', arr[1].x);
+                    newLine.setAttribute('y2', arr[1].y);
+                }
+                else {
+                    newLine.setAttribute('x2', arr[0].x);
+                    newLine.setAttribute('y2', arr[0].y);
+                }
+                newLine.setAttribute('stroke', 'black');
+                $('svg').append('newLine');
+            });
+        });
+        console.log(arr[0].x);
+    }
+*/
+        function canMoveTo(destX,
+                           destY) {
+        var imgData = context.getImageData(destX,
+            destY, 15, 15);
         var data = imgData.data;
-        var canMove = 1; // 1 = se puede mover
-        if (destX >= 0 && destX <= mazeWidth - 15 && destY >= 0 && destY <= mazeHeight - 15) { // revisar si el rectangulo se mueve en el canvas
-            for (var i = 0; i < 4 * 15 * 15; i += 4) { //check a todos los pixeles
-                if (data[i] === 0 && data[i + 1] === 0 && data[i + 2] === 0) { // black
-                    canMove = 0; // 0 = el rectangulo no se puede mover
+        var canMove =
+            1; // 1 = se puede mover
+        if (destX >= 0 &&
+            destX <= mazeWidth -
+            15 && destY >= 0 && destY <= mazeHeight - 15) {
+            // revisar si el rectangulo se mueve en el canvas
+            for (var i = 0; i < 4
+            *
+            15 * 15; i += 4) { //check a todos los pixeles
+                if (data[
+                        i
+                        ] === 0 && data[i + 1] === 0 &&
+                    data[i + 2] === 0) { // black
+                    canMove
+                        = 0;
+
+
+                    // 0 = el rectangulo no se puede mover
                     break;
                 }
-                else if (data[i] === 0 && data[i + 1] === 255 && data[i + 2] === 0) { // lime: #00FF00
+                else if (data[
+                        i] === 0
+                    && data[i
+                    +
+                    1] === 255
+                    &&
+
+
+                    data[i + 2] === 0) { // lime: #00FF00
                     canMove = 2; // 2 = se termino el laberinto
+
                     break;
                 }
             }
@@ -217,12 +710,304 @@
             canMove = 0;
         }
         return canMove;
-
-
-
     }
 
-    drawMazeAndRectangle(425,6); // { 425, 3 } posicion de rectangulo
-    window.addEventListener("keydown", moveRect, true);
+
+        drawMazeAndRectangle(425,6); // { 425, 3 } posicion de rectangulo
+        window.addEventListener("keydown", moveRect, true);
+        document.getElementById('easy').style.visibility = 'hidden';
+        document.getElementById('hard').style.visibility = 'hidden';
+
+}
+
+   function hardMode() {
+       var canvas = document.getElementById("mazecanvas");
+       var context = canvas.getContext("2d");
+       var currRectX = 425;
+       var currRectY = 3;
+       var mazeWidth = 556;
+       var mazeHeight = 556;
+       var pos = [];
+       var arr = []; //guarda posicion de donde se movio el cubo para saber a donde se movió el usuario
+       var intervalVar;
+
+
+       function makeWhite(x, y, w, h) {
+           context.beginPath();
+           context.rect(x, y, w, h);
+           context.closePath();
+           context.fillStyle = "white";
+           context.fill();
+       }
+
+       function moveRect(e) {
+           var estado = new Boolean(false); //variable para saber si el usuario terminó o no el laberinto
+           var newX;
+           var newY;
+           var canMove; // ni idea que hacia esto.
+           e = e || window.event;
+           moveA = 15; //1
+           moveB = 15; //22
+           var angle = 0;
+           switch (e.keyCode) {
+               case 38:   // upkey
+                   newX = currRectX;
+                   newY = currRectY - moveA;
+                   angle = 90;
+                   break;
+               case 87: // W key
+                   newX = currRectX;
+                   newY = currRectY - moveB;
+                   angle = 90;
+                   break;
+               case 37: // leftkey
+                   newX = currRectX - moveA;
+                   newY = currRectY;
+                   angle = 180;
+                   break;
+               case 65: // A key
+                   newX = currRectX - moveB;
+                   newY = currRectY;
+                   angle = 180;
+                   break;
+               case 40: // downkey
+                   newX = currRectX;
+                   newY = currRectY + moveA;
+                   angle = 270;
+                   break;
+               case 83: // S key
+                   newX = currRectX;
+                   newY = currRectY + moveB;
+                   angle = 270;
+                   break;
+               case 39: //rightkey
+                   newX = currRectX + moveA;
+                   newY = currRectY;
+                   break;
+               case 68: // D key
+                   newX = currRectX + moveB;
+                   newY = currRectY;
+                   break;
+               default:
+                   return;
+           }
+
+           var colisionX = 0;
+           var colisionY = 0;
+           if (angle == 0) {
+               colisionX = 10; //-X
+           }
+           else if (angle == 90) {
+               colisionY = -10 // -Y
+           }
+           else if (angle == 180) {
+               colisionX = -10; //-X
+           }
+           else if (angle == 270) {
+               colisionY = 10 // Y
+           }
+
+
+           pos = ( newY);
+           console.log(pos);
+           arr.push({x: newX, y: newY});
+
+
+           movingAllowed = canMoveTo(newX - colisionX, newY - colisionY);
+           if (movingAllowed === 1) {
+               drawRectangle(newX, newY, "#0000FF");
+               //drawLine();
+               //console.log( "old: "+currRectX+","+currRectY+" - "+difX+"_"+difY );
+
+               $(document).ready(function () {
+                   $("#btn1").click(function () {
+
+
+                       var newLine = document.createElementNS('canvas', 'line');
+                       newLine.setAttribute('id', 'line2');
+                       newLine.setAttribute('x1', newX);
+                       newLine.setAttribute('y1', newY);
+                       newLine.setAttribute('x2', parseInt(currRectX));
+                       newLine.setAttribute('y2', parseInt(currRectY));
+                       newLine.setAttribute('stroke', 'black');
+                       $('svg').append('newLine');
+                   });
+               });
+
+               currRectX = newX;
+               currRectY = newY;
+               estado === false; //false siginifica que no terminó el laberinto
+
+               //alert(estado); debug
+
+               //alert(Math.random(100,400));
+           }
+           else if (movingAllowed === 2) { //
+               //clearInterval(intervalVar);
+               makeWhite(0, 0, canvas.width, canvas.height);
+               context.font = "40px Arial";
+               context.fillStyle = "green";
+               context.textAlign = "center";
+               context.textBaseline = "middle";
+               context.fillText("¡Terminaste!", canvas.width / 2, canvas.height / 2);
+               estado === true; //true significa que terminó el laberinto
+               window.removeEventListener("keydown", moveRect, true);
+               //alert(estado); debug
+           }
+       }
+
+
+       function drawMazeAndRectangle(rectX, rectY) {
+           makeWhite(0, 0, canvas.width, canvas.height);
+           var mazeImg = new Image();
+           mazeImg.onload = function () { // cuando se dibuja el laberinto, crear rectangulo y circulo
+               context.drawImage(mazeImg, 0, 0);
+               drawRectangle(rectX, rectY, "#0000FF", false, true);
+               //drawLine(rectX,rectX), "#333", false, true;
+               context.beginPath();
+               context.arc(442, 122, 7, 0, 2 * Math.PI, false);
+               context.closePath();
+               context.fillStyle = '#00FF00';
+               context.fill();
+               alert("Utiliza las teclas w - arriba, a - izquierda, s - abajo, d - derecha");
+           };
+           mazeImg.src = "tesis2.gif";
+       }
+
+       function drawRectangle(x, y, style) {
+           makeWhite(currRectX, currRectY, 15, 15);
+           currRectX = x;
+           currRectY = y;
+           context.beginPath();
+           context.rect(x, y, 15, 15);
+           context.closePath();
+           context.fillStyle = style;
+           context.fill();
+       }
+
+       /*
+         function drawLine(){
+         $(document).ready(function() {
+         $("#btn1").click(function () {
+         //   $("svg").append('<line x1="0" y1="0" x2="200" y2="200" style="stroke:rgb(255,0,0,1);stroke-width:2" />' );
+         console.log("done!");
+
+         var newLine = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+         newLine.setAttribute('id', 'line2');
+         newLine.setAttribute('x1', arr[0].x);
+         newLine.setAttribute('y1', arr[0].y);
+         if(arr[1].x != null) {
+         newLine.setAttribute('x2', arr[1].x);
+         newLine.setAttribute('y2', arr[1].y);
+         }
+         else {
+         newLine.setAttribute('x2', arr[0].x);
+         newLine.setAttribute('y2', arr[0].y);
+         }
+         newLine.setAttribute('stroke', 'black');
+         $('svg').append('newLine');
+         });
+         });
+         console.log(arr[0].x);
+         }
+         */
+        function canMoveTo(destX, destY) {
+            var imgData = context.getImageData(destX, destY, 15, 15);
+            var data = imgData.data;
+            var canMove = 1;
+            // 1 = se puede mover
+            if (destX >= 0 &&
+                destX <= mazeWidth
+                - 15 && destY >= 0 && destY <= mazeHeight - 15) {
+                // revisar si el rectangulo se mueve en el canvas
+                for (var i = 0; i < 4
+                * 15 * 15; i += 4) {
+                    //check a todos los pixeles
+                    if (data[i
+                            ] === 0 &&
+                        data[i + 1] === 0 && data[i + 2] === 0) { // black
+                        canMove = 0;
+                        // 0 = el rectangulo no se puede mover
+                        break;
+                    }
+                    else if (data[
+                            i] === 0
+                        && data[i
+                        +
+                        1] === 255
+                        &&
+
+
+                        data[i + 2] === 0) {
+                        // lime: #00FF00
+                        canMove = 2;
+                        // 2 = se termino el laberinto
+                        break;
+                    }
+                }
+            }
+            else {
+                canMove = 0;
+            }
+            return canMove;
+
+
+
+        }
+
+
+
+           $(document).ready(function() {
+               var moveLeft = function() {
+                   console.log('Moving left!');
+               };
+
+               var moveRight = function() {
+                   console.log('Moving right!');
+               };
+
+               $('body').keydown(function(e) {
+                   switch (e.keyCode) {
+                       case 37:
+                           moveLeft();
+                           break;
+                       case 39:
+                           moveRight();
+                           break;
+                   }
+               });
+
+               $('#left-btn').click(moveLeft);
+
+               $('#right-btn').click(moveRight);
+           });
+
+
+
+        drawMazeAndRectangle(340,22); //posicion de rectangulo
+        window.addEventListener("keydown", moveRect, true);
+       document.getElementById('easy').style.visibility = 'hidden';
+       document.getElementById('hard').style.visibility = 'hidden';
+   }
+    /*var divOne = document.getElementById('1');
+    divOne.style.display='none'*/
 </script>
+<svg  width="500" height="400">
+</svg>
+    <button id="left-btn" class="buttonMovement">AAAH</button>
+    <button id="right-btn" class="buttonMovement">AAA</button>
+        </div>
+        </div>
+</div>
+
+<button id="easy" class="btn-default" style="width: 100px; height: 50px;" onclick="easyMode()">Modo facil</button>
+<button id="hard" class="btn-default"style="width: 100px; height: 50px;" onclick="hardMode()">Modo dificil</button>
+<button id="reset" class="btn-danger"style="width: 100px; height: 50px;" onclick="location.reload()">RESET</button>
+
+
+<!--librerias-->
+<script src="../bower_components/jquery/dist/jquery.min.js"></script>
+<script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+</body>
 </html>

@@ -1,0 +1,30 @@
+a {
+    color: #D55307; }
+
+body {
+    overflow-x: hidden; }
+body.noscroll {
+    overflow: hidden;
+    margin-bottom: 510px; }
+
+#page-wrapper {
+    padding-bottom: 50px; }
+
+.cuadro-proyectos {
+    border: 1px solid #e7e7e7;
+    min-height: 400px; }
+
+.navprobase {
+    border-bottom: 1px solid #E48030; }
+
+.sidebar-admin {
+    margin-top: -47px; }
+
+.sidebar-cliente {
+    margin-top: 4px; }
+
+.gris-rojizo {
+    color: #E48030;
+    margin: 20px 0 50px 0;
+    text-align: left;
+    font-size: 40px; }

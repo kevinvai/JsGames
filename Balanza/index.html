@@ -1,20 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-   <script src ="../bower_components/Matter/build/matter.min.js"></script>
+
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Balanza</title>
+
 
 </head>
 <body>
-
-</body>
+<link href="css/bootstrap.min.css" rel="stylesheet">
 <script>
 
-    var Example = Example || {};
-
-    Example.catapult = function() {
-        var Engine = Matter.Engine,
+            var Engine = Matter.Engine,
             Render = Matter.Render,
             Runner = Matter.Runner,
             Composites = Matter.Composites,
@@ -27,6 +26,8 @@
         // create engine
         var engine = Engine.create(),
             world = engine.world;
+        //engine.world.gravity.y = 0;  modificacion de gravedad
+        //engine.world.gravity.x = 0;
 
         // create renderer
         var render = Render.create({
@@ -36,8 +37,10 @@
                 width: Math.min(document.documentElement.clientWidth, 800),
                 height: Math.min(document.documentElement.clientHeight, 600),
                 showAngleIndicator: true,
-                showCollisions: true,
-                showVelocity: true
+                showCollisions: false,
+                showVelocity: true,
+                wireframes: false,
+                //showPositions: true
             }
         });
 
@@ -48,62 +51,148 @@
         Runner.run(runner, engine);
 
         // add bodies
-        var stack = Composites.stack(250, 255, 1, 6, 0, 0, function(x, y) {
-            return Bodies.rectangle(x, y, 30, 30);
-        });
+        /* Body.set(body, {
+                axes: options.axes || body.axes,
+                area: options.area || body.area,
+                mass: options.mass || body.mass,
+                inertia: options.inertia || body.inertia
+            });
 
+            /**
+             * Sets the mass of the body. Inverse mass and density are automatically updated to reflect the change.
+             * @method setMass
+             * @param {body} body
+             * @param {number} mass
+             */
+
+            /**
+             * Sets the body as static, including
+             isStatic flag and setting
+             mass and inertia to
+             Infinity.
+             *
+             @method setStatic
+             * @param {body} body
+             * @param {bool} isStatic
+             */
+            Bodies.setStatic = function(body,
+                                        isStatic) {
+
+                for (var i = 0; i < body.parts.length; i++) {
+                    var part = body.parts[i];
+                    part.isStatic = isStatic;
+
+                    if (isStatic) {
+                        part.restitution = 0;
+                        part.friction = 1;
+                        part.mass = part.inertia = part.density = Infinity;
+                        part.inverseMass = part.inverseInertia = 0;
+                        part.positionPrev.x = part.position.x;
+                        part.positionPrev.y = part
+                            .position.y
+                        ;part.anglePrev = part.angle;
+                        part.angularVelocity = 0;
+                        part.speed = 0;
+                        part.angularSpeed = 0;
+                        part.motion = 0;
+                    }
+                }
+            };
+
+            Bodies.setMass = function(body, mass) {
+                body.mass = mass;
+                body.inverseMass = 1 / body.mass;
+                body.density = body.mass / body.area;
+            };
+
+        var stack = Composites.stack(80, 255, 1, 4, 0, 0, function (x, y) { //distancia en x,y,?,iteraciones,?,?
+            return Bodies.rectangle(x, y, 30, 30);
+            return bodyA.friction(1); //se deslizan mas lento los objetos.
+            return bodyA.mass(1);
+        });
         var catapult = Bodies.rectangle(400, 520, 320, 20);
 
         World.add(world, [
             stack,
             catapult,
-            Bodies.rectangle(400, 600, 800, 50.5, { isStatic: true }),
-            Bodies.rectangle(250, 555, 20, 50, { isStatic: true }),
-            Bodies.circle(560, 100, 50, { density: 0.005 }),
-            Constraint.create({ bodyA: catapult, pointB: { x: 390, y: 580 } }),
-            Constraint.create({ bodyA: catapult, pointB: { x: 410, y: 580 } })
+            Bodies.rectangle(400, 600, 800, 50.5, {isStatic: true}),
+            Bodies.rectangle(400,600,800, 50.5, {isStatic: true}),
+            Bodies.rectangle(250,560,15, 20.5, {isStatic: true}),
+            Bodies.rectangle(550,560,15, 20.5, {isStatic: true}),
+            //Bodies.rectangle(400,600,30, 110.5, {isStatic: true}),
+            //Bodies.rectangle(250, 555, 20, 50, { isStatic: true }),
+            //Bodies.circle(560, 100, 50, { density: 0.005 }),
+            //Constraint.create(),
+            //paredes
+            Bodies.rectangle(400, 0, 800, 50, {isStatic: true}),
+            Bodies.rectangle(400, 600, 800, 50, {isStatic: true}),
+            Bodies.rectangle(800, 300, 50, 600, {isStatic: true}),
+            Bodies.rectangle(0, 300, 50, 600, {isStatic: true}),
+
+            Constraint.create({bodyA: catapult, pointB: {x: 390, y: 560}}),
+            Constraint.create({bodyA: catapult, pointB: {x: 410, y: 560}}),
+            Constraint.create({bodyA: Bodies.rectangle(550,560,15,20.5), pointB: {x: 410, y: 560}}),
+            Constraint.create({bodyA: Bodies.rectangle(250,560,15,20.5), pointB: {x: 410, y: 560}})
+
         ]);
 
         // add mouse control
         var mouse = Mouse.create(render.canvas),
-            mouseConstraint = MouseConstraint.create(engine, {
+            mouseConstraint = MouseConstraint.create(engine,
+
+                {
                 mouse: mouse,
                 constraint: {
-                    stiffness: 0.2,
+                    stiffness: 0.5,
                     render: {
                         visible: false
                     }
                 }
             });
-
         World.add(world, mouseConstraint);
 
+
+        /* World.add(world, [
+            // walls
+            Bodies.rectangle(400, 0, 800, 50, {isStatic: true}),
+            Bodies.rectangle(400, 600, 800, 50, {isStatic: true}),
+            Bodies.rectangle(800, 300, 50, 600, {isStatic: true}),
+            Bodies.rectangle(0, 300, 50, 600, {isStatic: true})
+        ]);*/
         // keep the mouse in sync with rendering
         render.mouse = mouse;
-
         // fit the render viewport to the scene
         Render.lookAt(render, {
-            min: { x: 0, y: 0 },
-            max: { x: 800, y: 600 }
+            min: {x: 0, y: 0},
+            max: {x: 800, y: 600}
         });
 
-        // context for MatterTools.Demo
-        return {
-            engine: engine,
-            runner: runner,
-            render: render,
-            canvas: render.canvas,
-            stop: function() {
-                Matter.Render.stop(render);
-                Matter.Runner.stop(runner);
-            }
-        };
-    };
-    // run the engine
-    Engine.run(engine);
 
-    // run the renderer
-    Render.run(render);
+
+            var buttons = document.getElementsByTagName("button");
+            var buttonsCount = buttons.length;
+            for (var i = 0; i <= buttonsCount; i += 1) {
+                buttons[i].onclick = function (e) {
+                    alert(this.id);
+                };
+            }
+
+            // context for MatterTools.Demo
+
     //alert("entrooooo");
 </script>
+
+
+<p style="align-content: center">¿Que objeto pesa más?</p>
+<!--<button class="centered"style="width: 100px; height: 50px;" onclick="" id="1">A</button>
+<button id="2" class="centered" style="width: 100px; height: 50px;">B</button>-->
+<button id="" class="centered" style="width: 100px; height: 50px;" onclick="location.reload()">B</button>
+
+<!--librerias-->
+<script src ="../bower_components/Matter/build/matter.min.js"></script>
+<script src ="../bower_components/Matter/build/matter.js"></script>
+<script src ="../bower_components/jquery/dist/jquery.min.js"></script>
+<script src ="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+</body>
 </html>

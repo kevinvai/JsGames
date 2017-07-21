@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
     <style>
 
         a {
@@ -21,8 +20,7 @@
             min-height: 400px; }
 
         .navprobase {
-            padding-bottom:30px;
-            border-bottom: 2px solid #0080FF; }
+            border-bottom: 1px solid #E48030; }
 
         .sidebar-admin {
             margin-top: -47px; }
@@ -418,199 +416,82 @@
     </style>
 
     <script src="../bower_components/raphael/raphael.min.js"></script>
-    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="../bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
-    <title>Transformacion</title>
+    <title>construccion</title>
 </head>
 <body>
-
-
-
-<div class="navprobase"></div>
-
-<div class="cuadro">
-    <p>Instrucciones: Arma la forma que aparece con<br>triangulos y cuadrados.</p>
+<div class="navprobase">
+<h2>Construye la figura a partir de cuadrado y las otras figuras basicas.</h2>
 </div>
-<script>
+<div class="sidebar-admin">
 
-    /*function polygon(x, y, size, sides, rotate) {
-        var self = this;
+</div>
+<div>
 
-        self.centrePoint = [x,y];
-        self.size = size;
-        self.sides = sides;
-        self.rotated = rotate;
-        self.sizeMultiplier = 50;
+    <script>
 
-        self.points = [];
+        function polygon(x, y, size, sides, rotate) {
+            var self = this;
 
-        for (i = 0; i < sides; i++) {
-            self.points.push([(x + (self.size * self.sizeMultiplier) * (rotate ? Math.sin(2 * 3.14159265 * i / sides) : Math.cos(2 * 3.14159265 * i / sides))), (y + (self.size * self.sizeMultiplier) * (rotate ? Math.cos(2 * 3.14159265 * i / sides) : Math.sin(2 * 3.14159265 * i / sides)))]);
+            self.centrePoint = [x,y];
+            self.size = size;
+            self.sides = sides;
+            self.rotated = rotate;
+            self.sizeMultiplier = 50;
+
+            self.points = [];
+
+            for (i = 0; i < sides; i++) {
+                self.points.push([(x + (self.size * self.sizeMultiplier) * (rotate ? Math.sin(2 * 3.14159265 * i / sides) : Math.cos(2 * 3.14159265 * i / sides))), (y + (self.size * self.sizeMultiplier) * (rotate ? Math.cos(2 * 3.14159265 * i / sides) : Math.sin(2 * 3.14159265 * i / sides)))]);
+            }
+
+            self.svgString = 'M' + self.points.join(' ') + ' L Z';
         }
 
-        self.svgString = 'M' + self.points.join(' ') + ' L Z';
-    }*/
+        var paper2 = Raphael(360, 90, 700, 520);
+        var paper = Raphael(370, 100, 680, 500);
+
+
+        //paper.canvas.style.backgroundColor = '#E0E0F8';
+        paper2.canvas.style.backgroundColor = '#3B240B';
+        paper.canvas.style.backgroundColor = '#088A29';
 
 
 
-    var paper2 = Raphael(360, 90, 700, 520);
-    var paper = Raphael(370, 100, 680, 500);
-    //paper.canvas.style.backgroundColor = '#FBEFF5';
-    //paper.canvas.style.backgroundColor = '#E0E0F8';
-    paper2.canvas.style.backgroundColor = '#3B240B';
-    paper.canvas.style.backgroundColor = '#088A29';
-    //paper.canvas.style.stroke = '#3B240B';
+        var t = paper.text(340, 100, "Arma la siguiente forma con las figuras geometricas");
 
+        var rex = paper.rect(300, 400, 50, 50).attr("fill", "#E6E6E6");
+        var tri = paper.path("M0,0 L100,0 100,50 z").attr("fill", "#E6E6E6");
 
-    //validacion para generado
+        t.attr('stroke', '#aceace')
+        rex.attr('stroke', '#000');
+        tri.attr('stroke', '#000');
 
-    var rect = paper.rect(400,400,100,50).attr("fill", "#E6E6E6");
+        //drag
+        var start = function () {
+                this.odx = 0;
+                this.ody = 0;
+                this.animate({"fill-opacity": 0.2}, 500);
+            },
+            move = function (dx, dy) {
+                this.translate(dx - this.odx, dy - this.ody);
+                this.odx = dx;
+                this.ody = dy;
+            },
+            up = function () {
+                this.animate({"fill-opacity": 1}, 500);
+            };
 
+        rex.drag(move,start,up);
+        tri.drag(move,start,up);
+    </script>
 
-    var tri = paper.path("M0,0 L100,0 100,50 z").attr("fill", "#E6E6E6");//rectangulo triangulo
-    var tri6 = paper.path("M0,0 L100,100 100,0 z").attr("fill", "#E6E6E6");//rectangulo triangulo
-    var tri7 = paper.path("M0,50 L0, 100 100 100").attr("fill", "#E6E6E6");//rectangulo triangulo
-    var tri8 = paper.path("M0,0 L0,100 100,0 z").attr("fill", "#E6E6E6");//otro rombo o cuadrado
-    var tri2 = paper.path("M0,0 L0,100 50,50 z").attr("fill", "#E6E6E6"); //triangulo rombo
-    var tri9 = paper.path("M0,50 L50,0 50,100 z").attr("fill", "#E6E6E6");
-    var tri4 = paper.path("M0,30 L0, 100 50,100 z").attr("fill", "#E6E6E6");
-    var tri5 = paper.path("M50,30 L0, 100 50,100 z").attr("fill", "#E6E6E6");
-    var rex = paper.rect(300, 400, 50, 50).attr("fill", "#E6E6E6");
-    var rex2 = paper.rect(200, 400, 50, 50).attr("fill", "#E6E6E6");
-
-
-    //var circle = paper.circle(300,50,25,25).attr("fill", "#ff0");
-    rect.attr('stroke', '#000');
-
-
-    tri.attr('stroke', '#000');
-    tri.attr('opacity', '0.7');
-    tri2.attr('stroke','#000');
-    tri2.attr('opacity','0.7');
-    tri4.attr('stroke', '#000');
-    tri4.attr('opacity', '0.7');
-    tri5.attr('stroke', '#000');
-    tri5.attr('opacity', '0.7');
-    tri6.attr('stroke', '#000');
-    tri6.attr('opacity', '0.7');
-    tri7.attr('stroke', '#000');
-    tri7.attr('opacity', '0.7');
-    tri8.attr('stroke', '#000');
-    tri8.attr('opacity', '0.7');
-    tri9.attr('stroke', '#000');
-    tri9.attr('opacity', '0.7');
-    rex.attr('stroke', '#000');
-    rex.attr('opacity', '0.7');
-    rex2.attr('stroke', '#000');
-    rex2.attr('opacity', '0.7');
-    //rect.attr('opacity', '0.7');
-
-    //drag
-    var start = function () {
-            this.odx = 0;
-            this.ody = 0;
-            this.animate({"fill-opacity": 0.2}, 500);
-        },
-        move = function (dx, dy) {
-            this.translate(dx - this.odx, dy - this.ody);
-            this.odx = dx;
-            this.ody = dy;
-        },
-        up = function () {
-            this.animate({"fill-opacity": 1}, 500);
-        };
-
-  //codigo animar objeto que rote
-    /*
-    var anim = Raphael.animation({"transform":"r360,320,240"},2000);
-    tri.animate(anim.repeat(Infinity));*/
-
-    tri.drag(move, start, up);
-    tri2.drag(move, start, up);
-    //tri22.drag(move, start, up);
-    //tri3.drag(move,start,up);
-    tri4.drag(move,start,up);
-    tri5.drag(move,start,up);
-    tri6.drag(move,start,up);
-    tri7.drag(move,start,up);
-    tri8.drag(move,start,up);
-    tri9.drag(move,start,up);
-    rex.drag(move, start, up);
-    rex2.drag(move, start, up);
-    rect.drag(move, start, up);
-    //circle.drag(move,start,up);
-
-
-
-
-   /* $(document).ready(function() {
-        //var paper = Raphael(0, 0, 450, 450);
-
-        //var path1 = new polygon(100, 100, 2, 6, false);
-        var path2 = new polygon(205, 187, 1, 6, false);
-        //var path3 = new polygon(100, 277, 2, 6, false);
-
-        //var hex1 = paper.path(path1.svgString).drag(move, start, up);
-        var hex2 = paper.path(path2.svgString).drag(move,start, up);
-        //var hex3 = paper.path(path3.svgString);
-
-        //hex1.node.id = "hex1";
-        //hex1.attr("fill", "#ccc");
-        //hex1.attr("stroke", "#aceace");
-
-        hex2.node.id = "hex2";
-        hex2.attr("fill", "#E6E6E6");
-        hex2.attr("stroke", "#000");
-    });
-*/
-
-    /*function collision (p1x, p1y, r1, p2x, p2y, r2) {
-        var a;
-        var x;
-        var y;
-
-        a = r1 + r2;
-        x = p1x - p2x;
-        y = p1y - p2y;
-
-        if ( a > Math.sqrt( (x*x) + (y*y) ) ) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-*/
-
-    function collision(r) {
-        var x, y;
-        r.circle(15, 15, 10).attr(fill).drag(function (dx, dy) {
-            this.attr({
-                cx: Math.min(Math.max(x + dx, 15), 85),
-                cy: Math.min(Math.max(y + dy, 15), 85)
-            });
-        }, function () {
-            x = this.attr("cx");
-            y = this.attr("cy");
-        });
-
-    }
-
-    if (collision == true) {
-
-        alert('recargagh');//debug
-        location.reload();
-    }
-
-
-
-</script>
+</div>
 <!--librerias-->
-
-<script src="../bower_components/bootstrap/dist/css/bootstrap-theme.min.css"></script>
-
+<script src="../bower_components/jquery/dist/jquery.min.js"></script>
+<script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 </body>
 </html>

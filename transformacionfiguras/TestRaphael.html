@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="../bower_components/raphael/raphael.js"></script>
+    <script src="../bower_components/raphael/raphael.min.js"></script>
+    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+    <meta charset="UTF-8">
+    <title>Raphael</title>
+</head>
+<body>
+<div id="container"></div>
+<script>
+
+    function polygon(x, y, size, sides, rotate) {
+        var self = this;
+
+        self.centrePoint = [x,y];
+        self.size = size;
+        self.sides = sides;
+        self.rotated = rotate;
+        self.sizeMultiplier = 50;
+
+        self.points = [];
+
+        for (i = 0; i < sides; i++) {
+            self.points.push([(x + (self.size * self.sizeMultiplier) * (rotate ? Math.sin(2 * 3.14159265 * i / sides) : Math.cos(2 * 3.14159265 * i / sides))), (y + (self.size * self.sizeMultiplier) * (rotate ? Math.cos(2 * 3.14159265 * i / sides) : Math.sin(2 * 3.14159265 * i / sides)))]);
+        }
+
+        self.svgString = 'M' + self.points.join(' ') + ' L Z';
+    }
+
+    var paper = Raphael(400, 100, 680, 500);
+    //paper.canvas.style.backgroundColor = '#FBEFF5';
+    paper.canvas.style.backgroundColor = '#E0E0F8';
+    paper.canvas.style.backgroundColor = '#088A29';
+    paper.canvas.style.stroke = '#3B240B';
+
+    var tri = paper.path("M0,0 L100,0 100,50 z").attr("fill", "#E6E6E6");//rectangulo triangulo
+    var tri6 = paper.path("M0,0 L100,100 100,0 z").attr("fill", "#E6E6E6");//rectangulo triangulo
+    var tri7 = paper.path("M0,50 L0, 100 100 100").attr("fill", "#E6E6E6");//rectangulo triangulo
+    var tri8 = paper.path("M0,0 L0,100 100,0 z").attr("fill", "#E6E6E6");//otro rombo o cuadrado
+    var tri2 = paper.path("M0,0 L0,100 50,50 z").attr("fill", "#E6E6E6"); //triangulo rombo
+    var tri9 = paper.path("M0,50 L50,0 50,100 z").attr("fill", "#E6E6E6");
+    var tri4 = paper.path("M0,30 L0, 100 50,100 z").attr("fill", "#E6E6E6");
+    var tri5 = paper.path("M50,30 L0, 100 50,100 z").attr("fill", "#E6E6E6");
+    var rex = paper.rect(300, 400, 50, 50).attr("fill", "#E6E6E6");
+    var rex2 = paper.rect(200, 400, 50, 50).attr("fill", "#E6E6E6");
+    var rect = paper.rect(400,400,100,50).attr("fill", "#E6E6E6");
+
+    //var circle = paper.circle(300,50,25,25).attr("fill", "#ff0");
+    tri.attr('stroke', '#aceace');
+    tri2.attr('stroke','#aceace');
+    tri4.attr('stroke', '#aceace');
+    tri5.attr('stroke', '#aceace');
+    tri6.attr('stroke', '#aceace');
+    tri7.attr('stroke', '#aceace');
+    tri8.attr('stroke', '#aceace');
+    tri9.attr('stroke', '#aceace');
+    rex.attr('stroke', '#aceace');
+    rex2.attr('stroke', '#aceace');
+    rect.attr('stroke', '#aceace')
+
+    var start = function () {
+            this.odx = 0;
+            this.ody = 0;
+            this.animate({"fill-opacity": 0.2}, 500);
+        },
+        move = function (dx, dy) {
+            this.translate(dx - this.odx, dy - this.ody);
+            this.odx = dx;
+            this.ody = dy;
+        },
+        up = function () {
+            this.animate({"fill-opacity": 1}, 500);
+        };
+
+    tri.drag(move, start, up);
+    tri2.drag(move, start, up);
+    //tri22.drag(move, start, up);
+    //tri3.drag(move,start,up);
+    tri4.drag(move,start,up);
+    tri5.drag(move,start,up);
+    tri6.drag(move,start,up);
+    tri7.drag(move,start,up);
+    tri8.drag(move,start,up);
+    tri9.drag(move,start,up);
+    rex.drag(move, start, up);
+    rex2.drag(move, start, up);
+    rect.drag(move, start, up);
+    //circle.drag(move,start,up);
+
+    $(document).ready(function() {
+        //var paper = Raphael(0, 0, 450, 450);
+
+        //var path1 = new polygon(100, 100, 2, 6, false);
+        var path2 = new polygon(205, 187, 1, 6, false);
+        //var path3 = new polygon(100, 277, 2, 6, false);
+
+        //var hex1 = paper.path(path1.svgString).drag(move, start, up);
+        var hex2 = paper.path(path2.svgString).drag(move,start, up);
+        //var hex3 = paper.path(path3.svgString);
+
+        //hex1.node.id = "hex1";
+        //hex1.attr("fill", "#ccc");
+        //hex1.attr("stroke", "#aceace");
+
+        hex2.node.id = "hex2";
+        hex2.attr("fill", "#E6E6E6");
+        hex2.attr("stroke", "#aceace");
+
+        doRevisar();
+    });
+
+
+   function doRevisar(){
+        //Revisar si las figuras chocan
+       //hacer un id para cada figura completa
+
+       var rect_collision = function (x1, y1, size1, x2, y2, size2) {
+           var a = {top: y1, bottom: y1+size1, left: x1, right: x1+size1};
+           var b = {top: y2, bottom: y2+size2, left: x2, right: x2+size2};
+
+           // this is the general way to figure out if two rects are overlapping
+           return !(a.left >= b.right || a.right <= b.left ||
+           a.top >= b.bottom || a.bottom <= b.top);
+       };
+
+
+       // check the x and y directions separately
+       var x_collide = rect_collision(r2_x, r2_y, rectSize, x, r1_y, rectSize);
+
+       // see if we are currently overlapping
+       if (!x_collide) {
+           // not colliding, update our x position normally
+           this.attr({x:x});
+           this.pdx = dx;
+       }
+       else {
+           // we are, stick the moving rect to the correct side of the stationary one
+           // based on the drag direction that got us stuck
+           this.attr({x: this.pdx > dx ? r2_x + rectSize + 1 : r2_x - rectSize - 1});
+       }
+
+   }
+
+</script>
+
+
+</body>
+</html>
