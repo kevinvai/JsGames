@@ -11,6 +11,34 @@
         body.noscroll {
             overflow: hidden;
             margin-bottom: 510px; }
+        .boton-downloadAlcance {
+            margin-left: 310%; }
+
+        .boton-verAlcance {
+            margin-left: 210%; }
+
+        .boton-editarAlcance {
+            margin-left: 110%; }
+
+        .boton-eliminarAlcance {
+            background: none !important; }
+
+        .botonAlcance {
+            color: #777; }
+
+        .botonAlcance:hover {
+            color: #D55307; }
+
+        .btn-modal {
+            background: #E48030;
+            color: #FFF; }
+        .btn-modal:hover {
+            background: #D55307;
+            color: #FFF; }
+        .btn-modal:focus {
+            background: #D55307;
+            color: #FFF;
+            outline: none; }
 
         #page-wrapper {
             padding-bottom: 50px; }
@@ -410,6 +438,10 @@
 
         .panel-subentregable > .panel-body {
             color: #737373; }
+        #page-wrapper {
+            padding-bottom: 50px;
+            padding-right: 50px;
+        }
     </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -418,7 +450,7 @@
 </head>
 
 <body>
-<div id="wrapper" class="container">
+<div id="page-wrapper" class="container">
     <div class="row">
         <div class="col-xs-6 col-sm-3">
     <p>Termina el laberinto movienedo el cuadro azul con las teclas: <br> W - mover hacia arriba, A - mover a la izquierda, S - mover hacia abajo, D - mover a la derecha</p>
@@ -681,9 +713,10 @@
     }
 
 
-
-    drawMazeAndRectangle(425,6); // { 425, 3 } posicion de rectangulo
-    window.addEventListener("keydown", moveRect, true);
+        drawMazeAndRectangle(425,6); // { 425, 3 } posicion de rectangulo
+        window.addEventListener("keydown", moveRect, true);
+        document.getElementById('easy').style.visibility = 'hidden';
+        document.getElementById('hard').style.visibility = 'hidden';
 
 }
 
@@ -950,8 +983,11 @@
            });
 
 
+
         drawMazeAndRectangle(340,22); //posicion de rectangulo
         window.addEventListener("keydown", moveRect, true);
+       document.getElementById('easy').style.visibility = 'hidden';
+       document.getElementById('hard').style.visibility = 'hidden';
    }
     /*var divOne = document.getElementById('1');
     divOne.style.display='none'*/
@@ -964,9 +1000,9 @@
         </div>
 </div>
 
-<button class="btn" style="width: 100px; height: 50px;" onclick="easyMode()">Modo facil</button>
-<button class=" btn "style="width: 100px; height: 50px;" onclick="hardMode()">Modo dificil</button>
-<button class=" btn "style="width: 100px; height: 50px;" onclick="location.reload()">reset</button>
+<button id="easy" class="btn-default" style="width: 100px; height: 50px;" onclick="easyMode()">Modo facil</button>
+<button id="hard" class="btn-default"style="width: 100px; height: 50px;" onclick="hardMode()">Modo dificil</button>
+<button id="reset" class="btn-danger"style="width: 100px; height: 50px;" onclick="location.reload()">RESET</button>
 
 
 <!--librerias-->

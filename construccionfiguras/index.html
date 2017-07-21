@@ -451,11 +451,15 @@
             self.svgString = 'M' + self.points.join(' ') + ' L Z';
         }
 
+        var paper2 = Raphael(360, 90, 700, 520);
         var paper = Raphael(370, 100, 680, 500);
 
-        paper.canvas.style.backgroundColor = '#E0E0F8';
+
+        //paper.canvas.style.backgroundColor = '#E0E0F8';
+        paper2.canvas.style.backgroundColor = '#3B240B';
         paper.canvas.style.backgroundColor = '#088A29';
-        paper.canvas.style.stroke = '#3B240B';
+
+
 
         var t = paper.text(340, 100, "Arma la siguiente forma con las figuras geometricas");
 
@@ -483,7 +487,6 @@
 
         rex.drag(move,start,up);
         tri.drag(move,start,up);
-
     </script>
 
 </div>

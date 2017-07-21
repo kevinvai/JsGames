@@ -2,18 +2,441 @@
 <html lang="en">
 <head>
 
+    <style>
+
+        a {
+            color: #D55307; }
+
+        body {
+            overflow-x: hidden; }
+        body.noscroll {
+            overflow: hidden;
+            margin-bottom: 510px; }
+
+        #page-wrapper {
+            padding-bottom: 50px; }
+
+        .cuadro-proyectos {
+            border: 1px solid #e7e7e7;
+            min-height: 400px; }
+
+        .navprobase {
+            padding-bottom:30px;
+            border-bottom: 2px solid #0080FF; }
+
+        .sidebar-admin {
+            margin-top: -47px; }
+
+        .sidebar-cliente {
+            margin-top: 4px; }
+
+        .gris-rojizo {
+            color: #E48030;
+            margin: 20px 0 50px 0;
+            text-align: left;
+            font-size: 40px; }
+
+        .gris-rojizo-cliente {
+            color: #E48030;
+            margin: 20px 0 0px 0;
+            text-align: left;
+            font-size: 40px; }
+
+        .contenedor-proyecto {
+            border: 2px solid #E48030;
+            padding: 15px 0px 5px 50px;
+            border-radius: 15px;
+            width: 100%; }
+
+        .contenedor-proyecto:hover {
+            transition: .7s;
+            -moz-box-shadow: 0 0 10px #E48030;
+            -webkit-box-shadow: 0 0 10px #E48030;
+            box-shadow: 0 0 10px #E48030;
+            cursor: pointer; }
+
+        .titulo-contenedor {
+            color: #E48030;
+            font-size: 19px;
+            font-weight: bold; }
+
+        .direccion-contenedor {
+            color: #737373;
+            font-size: 17px;
+            margin-left: -3%;
+            margin-top: -1%; }
+
+        .icono-mapa {
+            color: #E48030;
+            font-size: 22px; }
+
+        .direccion {
+            margin-left: 7px;
+            color: #999999;
+            font-size: 17px;
+            font-weight: 500; }
+
+        .linea-proyecto {
+            margin-top: 10%;
+            height: 12px;
+            background: #DEDEDE;
+            border-radius: 15px; }
+
+        .navegador-cliente {
+            opacity: 0.9; }
+
+        .porcentaje-proyecto {
+            padding-top: 27px;
+            color: #737373;
+            font-size: 17px; }
+
+        .iconos-clientes {
+            margin-top: 20%;
+            height: 65px; }
+
+        #myBar {
+            width: 50%;
+            height: 100%;
+            background-color: #D55307;
+            border-radius: 15px; }
+
+        .back-img-proyectos {
+            width: 100%;
+            background: url("/assets/img/proyectos/const.jpg") no-repeat;
+            height: 300px;
+            background-size: cover;
+            margin-top: -51px; }
+
+        .pestana-activa {
+            width: 100%;
+            height: 29px;
+            line-height: 30px;
+            background: #E48030;
+            font-weight: 600;
+            color: #fff !important;
+            border-top-left-radius: 18px;
+            border-top-right-radius: 18px;
+            text-align: center;
+            cursor: pointer;
+            margin-right: -15px; }
+        .pestana-activa:hover {
+            background: #D55307; }
+
+        .pestana-nombre {
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            display: block;
+            padding: 2px; }
+
+        .margen-pestana {
+            margin-right: -15px; }
+
+        .titulo-pestana {
+            color: #fff !important;
+            text-decoration: none; }
+        .titulo-pestana:hover {
+            text-decoration: none; }
+
+        .pestana-inactiva {
+            width: 100%;
+            height: 29px;
+            line-height: 30px;
+            background: #9B999E;
+            font-weight: 600;
+            color: #d5d5d5 !important;
+            border-top-left-radius: 18px;
+            border-top-right-radius: 18px;
+            text-align: center;
+            cursor: pointer; }
+        .pestana-inactiva:hover {
+            background: #555555;
+            color: #FFF; }
+
+        .pestana-nuevo {
+            width: 100%;
+            height: 29px;
+            line-height: 30px;
+            background: #C1C0C3;
+            font-weight: 600;
+            color: #fff !important;
+            border-top-left-radius: 18px;
+            border-top-right-radius: 18px;
+            text-align: center;
+            cursor: pointer;
+            margin-left: -15%; }
+        .pestana-nuevo:hover {
+            transition: 1s;
+            background: #ccc; }
+
+        .navbar-brand {
+            padding: 0px; }
+        .navbar-brand > img {
+            height: 100%;
+            padding: 15px;
+            width: auto; }
+        .navbar-brand > img {
+            padding: 12px 15px; }
+
+        .cuadro {
+            margin-top: 30%; }
+
+        .contenedor-links {
+            position: relative;
+            height: 300px; }
+        .contenedor-links:hover a.delete {
+            display: block;
+            opacity: 1;
+            transition: opacity ease-in-out 0.2s; }
+        .contenedor-links:hover a.borrar {
+            display: block;
+            opacity: 1;
+            transition: opacity ease-in-out 0.2s; }
+        .contenedor-links:hover a.edit {
+            position: absolute;
+            display: block;
+            top: 15px;
+            right: 30px;
+            width: calc(17% - 15px);
+            height: 40px !important;
+            text-decoration: none;
+            z-index: 2;
+            opacity: 1;
+            transition: opacity ease-in-out 0.2s;
+            cursor: pointer; }
+        .contenedor-links a.delete {
+            position: absolute;
+            display: block;
+            top: 15px;
+            right: 2px;
+            width: calc(17% - 15px);
+            height: 40px !important;
+            text-decoration: none;
+            z-index: 2;
+            opacity: 0;
+            background: linear-gradient(to bottom, #e48030 0%, rgba(228, 128, 48, 0) 100%);
+            transition: opacity ease-in-out 0.2s; }
+        .contenedor-links a.edit {
+            position: absolute;
+            display: block;
+            top: 15px;
+            right: 2px;
+            width: calc(17% - 15px);
+            height: 40px !important;
+            text-decoration: none;
+            z-index: 2;
+            opacity: 0;
+            transition: opacity ease-in-out 0.2s; }
+        .contenedor-links a.borrar {
+            position: absolute;
+            display: block;
+            top: 15px;
+            left: 15px;
+            width: calc(87.5% - 15px);
+            height: 40px !important;
+            text-decoration: none;
+            z-index: 2;
+            opacity: 0;
+            background: linear-gradient(to bottom, #e48030 0%, rgba(228, 128, 48, 0) 100%);
+            transition: opacity ease-in-out 0.2s; }
+        .contenedor-links a.thumbnail {
+            position: absolute;
+            top: 15px;
+            bottom: 0;
+            left: 15px;
+            right: 0;
+            text-align: center;
+            padding: calc(50% - 45px) 20px 20px 20px;
+            color: #E48030;
+            font-size: 18px;
+            transition: border 0.2s ease-in-out 0s, color 0.2s ease-in-out;
+            border-color: #E48030;
+            border-width: 2px; }
+        .contenedor-links a.thumbnail:hover {
+            color: #D55307;
+            border-color: #E48030;
+            border-width: 2px;
+            text-decoration: none; }
+        .contenedor-links p.texto-borrar {
+            color: #FFF;
+            float: right;
+            font-size: 16px;
+            font-weight: bold;
+            margin-top: 12px;
+            margin-right: 10px;
+            margin-bottom: 12px; }
+
+        span.agregar {
+            font-size: 30px;
+            margin-top: 20px; }
+
+        .menu-inicio > ul > li:hover {
+            background: #D55307; }
+        .menu-inicio > ul > li > a:hover {
+            color: #FFF !important; }
+
+        .menu-top > li > a {
+            color: #777;
+            font-size: 14px; }
+        .menu-top > li > a:hover {
+            background: #E48030;
+            color: #FFF; }
+
+        .side-menu > li > a {
+            color: #D55307;
+            font-weight: bold;
+            padding: 15px 10px;
+            transition: color linear 80ms, background linear 80ms; }
+        .side-menu > li > a:hover {
+            background: #D55307;
+            color: #FFF;
+            font-weight: bold;
+            -webkit-animation: moveAndBack 1s ease-in-out;
+            -webkit-animation-direction: alternate;
+            -webkit-animation-iteration-count: 2;
+            -webkit-animation-fill-mode: forwards; }
+        @-webkit-keyframes moveAndBack {
+            0% {
+                -webkit-transform: translate(0); }
+            25% {
+                -webkit-transform: translateX(5px); }
+            100% {
+                -webkit-transform: translateX(5px); } }
+        .side-menu > li > ul > li > a {
+            color: #737373;
+            padding: 15px 10px;
+            transition: color linear 80ms, background linear 80ms; }
+        .side-menu > li > ul > li > a:hover {
+            background: #E48030;
+            color: #FFF; }
+
+        .titulo-alcance {
+            color: #E48030; }
+
+        .textarea-modalAlcance {
+            background-color: #FFF;
+            color: #737373;
+            border: 1px solid #ccc; }
+        .textarea-modalAlcance:focus {
+            border: 1px solid #E48030; }
+
+        .titulo-wbs {
+            color: #FFF; }
+
+        .header-modal {
+            background-color: #E48030;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px; }
+
+        .closedit {
+            color: #FFF !important;
+            opacity: 1 !important;
+            text-shadow: 0px !important; }
+        .closedit:hover {
+            color: #e7e7e7 !important;
+            text-shadow: 0 1px 0 #737373 !important; }
+
+        .margen-wbs {
+            padding: 0 15px; }
+
+        .subtitulo-alcance {
+            color: #737373;
+            font-size: 20px; }
+
+        .tabla-alcance-body tbody tr {
+            border: 1px solid #ccc;
+            color: #777; }
+        .tabla-alcance-body td {
+            padding: 20px; }
+
+        .subtitulo-wbs {
+            color: #737373;
+            font-size: 14px;
+            font-weight: 200; }
+
+        .subtituloWbs {
+            color: #E48030;
+            font-size: 18px; }
+
+        .subtitulo-proyectos {
+            color: #E48030;
+            font-weight: 500; }
+
+        .subtitulo-subentregable {
+            color: #737373 !important;
+            font-size: 14px; }
+
+        .enlace-muroComentarios {
+            color: #737373 !important;
+            font-size: 14px; }
+        .enlace-muroComentarios:hover {
+            text-decoration: none; }
+
+        .subtitulo-foto {
+            color: #737373 !important;
+            font-size: 14px;
+            font-weight: normal; }
+
+        .titulo-entregable {
+            display: block;
+            background-color: #e7e7e7; }
+
+        .panel-entregable {
+            border-color: #D55307; }
+
+        .panel-entregable > .panel-heading {
+            color: #FFF;
+            background-color: #D55307;
+            border-color: #D55307; }
+
+        .panel-entregable > .panel-body {
+            color: #737373; }
+
+        .panel-entregable > .panel-heading + .panel-collapse > .panel-body {
+            border-top-color: #D55307; }
+
+        .panel-entregable > .panel-heading .badge {
+            color: #FFF;
+            background-color: #D55307; }
+
+        .panel-entregable > .panel-footer + .panel-collapse > .panel-body {
+            border-bottom-color: #D55307; }
+
+        .panel-subentregable {
+            border-color: #E48030; }
+
+        .panel-subentregable > .panel-heading {
+            color: #FFF;
+            background-color: #E48030;
+            border-color: #E48030; }
+
+        .panel-subentregable > .panel-body {
+            color: #737373; }
+
+
+
+    </style>
+
     <script src="../bower_components/raphael/raphael.min.js"></script>
+    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="../bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
-    <title>Raphael</title>
+    <title>Transformacion</title>
 </head>
 <body>
-<div id="container"></div>
+
+
+
+<div class="navprobase"></div>
+
+<div class="cuadro">
+    <p>Instrucciones: Arma la forma que aparece con<br>triangulos y cuadrados.</p>
+</div>
 <script>
 
-    function polygon(x, y, size, sides, rotate) {
+    /*function polygon(x, y, size, sides, rotate) {
         var self = this;
 
         self.centrePoint = [x,y];
@@ -29,13 +452,23 @@
         }
 
         self.svgString = 'M' + self.points.join(' ') + ' L Z';
-    }
+    }*/
 
-    var paper = Raphael(400, 100, 680, 500);
+
+
+    var paper2 = Raphael(360, 90, 700, 520);
+    var paper = Raphael(370, 100, 680, 500);
     //paper.canvas.style.backgroundColor = '#FBEFF5';
-    paper.canvas.style.backgroundColor = '#E0E0F8';
+    //paper.canvas.style.backgroundColor = '#E0E0F8';
+    paper2.canvas.style.backgroundColor = '#3B240B';
     paper.canvas.style.backgroundColor = '#088A29';
-    paper.canvas.style.stroke = '#3B240B';
+    //paper.canvas.style.stroke = '#3B240B';
+
+
+    //validacion para generado
+
+    var rect = paper.rect(400,400,100,50).attr("fill", "#E6E6E6");
+
 
     var tri = paper.path("M0,0 L100,0 100,50 z").attr("fill", "#E6E6E6");//rectangulo triangulo
     var tri6 = paper.path("M0,0 L100,100 100,0 z").attr("fill", "#E6E6E6");//rectangulo triangulo
@@ -47,21 +480,35 @@
     var tri5 = paper.path("M50,30 L0, 100 50,100 z").attr("fill", "#E6E6E6");
     var rex = paper.rect(300, 400, 50, 50).attr("fill", "#E6E6E6");
     var rex2 = paper.rect(200, 400, 50, 50).attr("fill", "#E6E6E6");
-    var rect = paper.rect(400,400,100,50).attr("fill", "#E6E6E6");
+
 
     //var circle = paper.circle(300,50,25,25).attr("fill", "#ff0");
-    tri.attr('stroke', '#aceace');
-    tri2.attr('stroke','#aceace');
-    tri4.attr('stroke', '#aceace');
-    tri5.attr('stroke', '#aceace');
-    tri6.attr('stroke', '#aceace');
-    tri7.attr('stroke', '#aceace');
-    tri8.attr('stroke', '#aceace');
-    tri9.attr('stroke', '#aceace');
-    rex.attr('stroke', '#aceace');
-    rex2.attr('stroke', '#aceace');
-    rect.attr('stroke', '#aceace')
+    rect.attr('stroke', '#000');
 
+
+    tri.attr('stroke', '#000');
+    tri.attr('opacity', '0.7');
+    tri2.attr('stroke','#000');
+    tri2.attr('opacity','0.7');
+    tri4.attr('stroke', '#000');
+    tri4.attr('opacity', '0.7');
+    tri5.attr('stroke', '#000');
+    tri5.attr('opacity', '0.7');
+    tri6.attr('stroke', '#000');
+    tri6.attr('opacity', '0.7');
+    tri7.attr('stroke', '#000');
+    tri7.attr('opacity', '0.7');
+    tri8.attr('stroke', '#000');
+    tri8.attr('opacity', '0.7');
+    tri9.attr('stroke', '#000');
+    tri9.attr('opacity', '0.7');
+    rex.attr('stroke', '#000');
+    rex.attr('opacity', '0.7');
+    rex2.attr('stroke', '#000');
+    rex2.attr('opacity', '0.7');
+    //rect.attr('opacity', '0.7');
+
+    //drag
     var start = function () {
             this.odx = 0;
             this.ody = 0;
@@ -75,6 +522,11 @@
         up = function () {
             this.animate({"fill-opacity": 1}, 500);
         };
+
+  //codigo animar objeto que rote
+    /*
+    var anim = Raphael.animation({"transform":"r360,320,240"},2000);
+    tri.animate(anim.repeat(Infinity));*/
 
     tri.drag(move, start, up);
     tri2.drag(move, start, up);
@@ -91,7 +543,10 @@
     rect.drag(move, start, up);
     //circle.drag(move,start,up);
 
-    $(document).ready(function() {
+
+
+
+   /* $(document).ready(function() {
         //var paper = Raphael(0, 0, 450, 450);
 
         //var path1 = new polygon(100, 100, 2, 6, false);
@@ -108,45 +563,54 @@
 
         hex2.node.id = "hex2";
         hex2.attr("fill", "#E6E6E6");
-        hex2.attr("stroke", "#aceace");
+        hex2.attr("stroke", "#000");
     });
+*/
 
+    /*function collision (p1x, p1y, r1, p2x, p2y, r2) {
+        var a;
+        var x;
+        var y;
 
-    /*function doRevisar(){
-        //Revisar si las figuras chocan
-        //hacer un id para cada figura completa
+        a = r1 + r2;
+        x = p1x - p2x;
+        y = p1y - p2y;
 
-        var rect_collision = function (x1, y1, size1, x2, y2, size2) {
-            var a = {top: y1, bottom: y1+size1, left: x1, right: x1+size1};
-            var b = {top: y2, bottom: y2+size2, left: x2, right: x2+size2};
-
-            // this is the general way to figure out if two rects are overlapping
-            return !(a.left >= b.right || a.right <= b.left ||
-            a.top >= b.bottom || a.bottom <= b.top);
-        };
-
-
-        // check the x and y directions separately
-        var x_collide = rect_collision(r2_x, r2_y, rectSize, x, r1_y, rectSize);
-
-        // see if we are currently overlapping
-        if (!x_collide) {
-            // not colliding, update our x position normally
-            this.attr({x:x});
-            this.pdx = dx;
+        if ( a > Math.sqrt( (x*x) + (y*y) ) ) {
+            return true;
+        } else {
+            return false;
         }
-        else {
-            // we are, stick the moving rect to the correct side of the stationary one
-            // based on the drag direction that got us stuck
-            this.attr({x: this.pdx > dx ? r2_x + rectSize + 1 : r2_x - rectSize - 1});
-        }
+    }
+
+*/
+
+    function collision(r) {
+        var x, y;
+        r.circle(15, 15, 10).attr(fill).drag(function (dx, dy) {
+            this.attr({
+                cx: Math.min(Math.max(x + dx, 15), 85),
+                cy: Math.min(Math.max(y + dy, 15), 85)
+            });
+        }, function () {
+            x = this.attr("cx");
+            y = this.attr("cy");
+        });
 
     }
-    */
+
+    if (collision == true) {
+
+        alert('recargagh');//debug
+        location.reload();
+    }
+
+
 
 </script>
 <!--librerias-->
-<script src="../bower_components/jquery/dist/jquery.min.js"></script>
+
 <script src="../bower_components/bootstrap/dist/css/bootstrap-theme.min.css"></script>
+
 </body>
 </html>
