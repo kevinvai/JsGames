@@ -75,34 +75,67 @@
 
     */
 
+    function changePosition() {
+        //1er acomodo
+        rex.animate({
+            x: 290,
+            y: 190,
+        }, 1000);
 
-function changePosition() {
-    //1er acomodo
-    rex.animate({
-        x: 290,
-        y: 190,
-    }, 1000);
+        rex2.animate({
+            x: 290,
+            y: 140,
+        }, 1000);
 
-    rex2.animate({
-        x: 290,
-        y: 140,
-    }, 1000);
-
-    rex3.animate({
-        x: 340,
-        y: 140,
-    }, 1000);
-    rex4.animate({
-        x: 340,
-        y: 190,
-    }, 1000);
-
-    x = true;
+        rex3.animate({
+            x: 340,
+            y: 140,
+        }, 1000);
+        rex4.animate({
+            x: 340,
+            y: 190,
+        }, 1000);
 
 
-}
 
-    setInterval(changePosition(), 3000);
+
+    }
+
+    function changePosition2() {
+        //1er acomodo
+        rex.animate({
+            x: 290,
+            y: 190,
+        }, 1000);
+
+        rex2.animate({
+            x: 290,
+            y: 140,
+        }, 1000);
+
+        rex3.animate({
+            x: 340,
+            y: 140,
+        }, 1000);
+        rex4.animate({
+            x: 340,
+            y: 190,
+        }, 1000);
+
+
+
+
+    }
+
+
+    changePosition();
+
+    changePosition2();
+
+
+
+
+    //setInterval(changePosition(), 3000);
 
 
 
