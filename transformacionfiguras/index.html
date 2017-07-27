@@ -50,50 +50,10 @@
     paper.canvas.style.backgroundColor = '#088A29';
     //paper.canvas.style.stroke = '#3B240B';
 
-    createObject();
-    //validacion para generado
-
-    var rect = paper.rect(400,400,100,50).attr("fill", "#E6E6E6");
+    createObject(); // creacion de objeto para armar, random
 
 
-
-
-
-    //var circle = paper.circle(300,50,25,25).attr("fill", "#ff0");
-    rect.attr('stroke', '#000');
-
-
-
-    rect.attr('opacity', '0.7');
-
-    //rect.attr('opacity', '0.7');
-
-    //drag
-
-
-
-
-    function collision(r) {
-        var x, y;
-        r.circle(15, 15, 10).attr(fill).drag(function (dx, dy) {
-            this.attr({
-                cx: Math.min(Math.max(x + dx, 15), 85),
-                cy: Math.min(Math.max(y + dy, 15), 85)
-            });
-        }, function () {
-            x = this.attr("cx");
-            y = this.attr("cy");
-        });
-
-    }
-
-    if (collision == true) {
-
-        alert('recargagh');//debug
-        location.reload();
-    }
-
-//funcion perrona
+    //funcion perrona
     function createObject() {
 
 
@@ -137,8 +97,6 @@
             //rect.drag(move, start, up);
             //checar area
 
-            setTimeout(checkPosition(), 2000);
-
             var restart;
             //comparador de posiciones
             if (x === x2 && y === y2) {
@@ -148,23 +106,22 @@
                 restart = true;
             }
 
-            if (restart == true) {
+            if (restart === true) {
 
                 location.reload();
             }
 
 
-        else {
+            else {
 
-            //no hacer nada
-            restart = false;
+                //no hacer nada
+
+            }
+
 
         }
 
-
-    }
-
-        else if(al == 2) {
+        else if (al === 2) {
 
             function polygon(x, y, size, sides, rotate) {
                 var self = this;
@@ -187,7 +144,7 @@
             $(document).ready(function () {
                 //var paper = Raphael(0, 0, 450, 450);
                 //var path1 = new polygon(100, 100, 2, 6, false);
-                var path2 = new polygon(350, 200, 1, 6, false);
+                var path2 = new polygon(300, 200, 1, 6, false);
                 //var path3 = new polygon(100, 277, 2, 6, false);
 
                 //var hex1 = paper.path(path1.svgString).drag(move, start, up);
@@ -202,11 +159,6 @@
                 var tri = paper.path("M0,0 L100,0 100,50 z").attr("fill", "#E6E6E6");//rectangulo triangulo
                 var tri6 = paper.path("M0,0 L100,100 100,0 z").attr("fill", "#E6E6E6");//rectangulo triangulo
                 var tri7 = paper.path("M0,50 L0, 100 100 100").attr("fill", "#E6E6E6");//rectangulo triangulo
-                //var tri8 = paper.path("M0,0 L0,100 100,0 z").attr("fill", "#E6E6E6");//otro rombo o cuadrado
-                //var tri2 = paper.path("M0,0 L0,100 50,50 z").attr("fill", "#E6E6E6"); //triangulo rombo
-                //var tri9 = paper.path("M0,50 L50,0 50,100 z").attr("fill", "#E6E6E6");
-                //var tri4 = paper.path("M0,30 L0, 100 50,100 z").attr("fill", "#E6E6E6");
-                //var tri5 = paper.path("M50,30 L0, 100 50,100 z").attr("fill", "#E6E6E6");
 
                 tri.attr('stroke', '#000');
                 tri.attr('opacity', '0.7');
@@ -260,46 +212,53 @@
 
 
                 //obtener posiciones
-                 x = hexagon.attrs.x;
-                 y = hexagon.attrs.y;
-                 alert(x);
-                 x2 = rex2.attrs.x;
-                 y2 = rex2.attrs.y;
+                x = hexagon.attrs.x;
+                y = hexagon.attrs.y;
+                alert(x);
+                x2 = rex2.attrs.x;
+                y2 = rex2.attrs.y;
 
                 restart = false;
-                //comparador de posiciones
-                if (x = x2) {
-                    if (y = y2) {
 
+            });
+                //revisado  constante de posicion
+              var myInterval =  setInterval(function () {
+                    x = rex.attrs.x;
+                    y = rex.attrs.y;
+                    x2 = rex2.attrs.x;
+                    y2 = rex2.attrs.y;
+
+                    var x_final = rect.attrs.x;
+                    var y_final = rect.attrs.y;
+
+                    if (x && x2 === x_final && y && y2 === y_final) {
                         alert("Correcto");
                         restart = true;
 
-
-                        if (restart == true) {
-
+                        if (restart === true) {
                             location.reload();
                         }
                     }
+                    console.log(" " + x + "  " + x2 + " " + y + y2);
 
-                }
+                    x2 = 0;
+                    y2 = 0;
+                }, 10000)
+            }
 
-                else {
-
-                    //no hacer nada
-                    restart = false;
-
-                }
-
-
-            })
-        }
+if(restart === true){
+    clearInterval(myInterval);
+}
 
 
 //agregar propiedades del rectangulo
 
-        else if(al == 3){
+        else if (al === 3) {
+
+            var rect = paper.rect(300, 200, 100, 50).attr("fill", "#E6E6E6");
 
             var rex2 = paper.rect(300, 200, 50, 50).attr("fill", "#E6E6E6");
+            var rex = paper.rect(300, 200, 50, 50).attr("fill", "#E6E6E6");
             rex2.attr('stroke', '#000');
             rex2.attr('opacity', '1');
 
@@ -318,41 +277,63 @@
                     this.animate({"fill-opacity": 1}, 500);
                 };
 
+            rex2.drag(move, start, up);
+            rex.drag(move, start, up);
+
             //
-            var x = rex.attrs.x;
-            var y = rex.attrs.y;
-            var x2 = rex2.attrs.x;
-            var y2 = rex2.attrs.y;
+            /*x = rect.attrs.x;
+             y = rect.attrs.y;
+             x2 = rex2.attrs.x;
+             y2 = rex2.attrs.y;
+*/
+            // alert("" + x + " " + x2);
+
+
+            //var circle = paper.circle(300,50,25,25).attr("fill", "#ff0");
+            rect.attr('stroke', '#000');
+
+
+
+            rect.attr(
+                'opacity', '0.7');
+
+
 
 
             restart = false;
             //comparador de posiciones
-            if(x = x2){
-                if(y = y2){
+            //debugger;
+            /*function checkPosition() {
+                if (x === x2 && y === y2) {
 
+            }
+*/ //revisado  constante de posicion
+           var myInterval =  setInterval(function(){
+
+                x = rex.attrs.x+rex.odx;
+                y = rex.attrs.y+rex.ody;
+                x2 = rex2.attrs.x+rex2.odx;
+                y2 = rex2.attrs.y+rex2.ody;
+
+                var x_final = rect.attrs.x;
+                var y_final = rect.attrs.y;
+
+                if( x === x_final && x2 === x_final &&
+                    y === y_final && y2 === y_final){
                     alert("Correcto");
                     restart = true;
 
-                    if(restart == true){
+                    if (restart === true) {
 
                         location.reload();
                     }
-                }
+                } console.log(" " + x + ","+y+ " "+rex.odx+","+rex.ody+","+ x2 + "," + y2+" "+rex2.odx+","+rex2.ody);
 
-            }
-
-            else{
-
-                //no hacer nada
-                restart = false;
-            }
-
+            },4000)
 
         }
 
-
-
-        else if(al == 4){
+        else if(al === 4){
 
             var tri8 = paper.path("M0,0 L0,100 100,0 z").attr("fill", "#E6E6E6");
             tri8.attr('stroke', '#000');
@@ -372,31 +353,9 @@
                 up = function () {
                     this.animate({"fill-opacity": 1}, 500);
                 };
-
-
         }
 
         restart = false;
-        //comparador de posiciones
-        if(x = x2){
-            if(y = y2){
-
-                alert("Correcto");
-                restart = true;
-
-                if(restart == true){
-
-                    location.reload();
-                }
-            }
-
-        }
-
-        else{
-
-            //no hacer nada
-            restart = false;
-        }
 
 
         }
