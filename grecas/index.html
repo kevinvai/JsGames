@@ -62,19 +62,6 @@
     //tri.drag(move,start,up);
 
 
-    //codigo animar objeto que rote
-
-    /* var anim = Raphael.animation({"transform":"r2,40,10"},2000);
-     var anim2 = Raphael.animation({"transform":"r10,10,0"},2000);
-     var anim3 = Raphael.animation({"transform":"r-20,0,0"},2000);
-     var anim4 = Raphael.animation({"transform":"M100 100L190 190"},2000);
-    // rex.animate(anim.repeat(Infinity));
-     rex2.animate(anim2.repeat(Infinity));
-     rex3.animate(anim3.repeat(Infinity));
-     rex4.animate(anim4.repeat(Infinity));
-
-    */
-
     function changePosition() {
         //1er acomodo
         rex.animate({
@@ -102,60 +89,82 @@
     }
 
     function changePosition2() {
-        //1er acomodo
+       //2do acomodo
         rex.animate({
-            x: 290,
+            x: 340,
             y: 190,
         }, 1000);
 
         rex2.animate({
-            x: 290,
+            x: 340,
             y: 140,
         }, 1000);
 
         rex3.animate({
-            x: 340,
+            x: 290,
             y: 140,
         }, 1000);
         rex4.animate({
-            x: 340,
+            x: 290,
             y: 190,
         }, 1000);
 
 
 
-
     }
+            //debugger;
 
 
-    changePosition();
+
+    var x = 0;
+    var check = false;
+    //var text = "";
+    //var i = 0;
+
+
+
+        setTimeout(changePosition,1000);
+
+        setTimeout(changePosition2,2500);
+
+        //debugger;
+        console.log(x);
+       x++;
+
+
+
+//calificador
+
+    var restart = false;
+    var myInterval =  setInterval(function(){
+
+        x = rex.attrs.x+rex.odx;
+        y = rex.attrs.y+rex.ody;
+        x2 = rex2.attrs.x+rex2.odx;
+        y2 = rex2.attrs.y+rex2.ody;
+
+        var x_final = rex.attrs.x;
+        var y_final = rex.attrs.y;
+
+        if( x === x_final && x2 === x_final &&
+            y === y_final && y2 === y_final){
+           // alert("Correcto");
+            restart = true;
+
+            if (restart === true) {
+
+                location.reload();
+            }
+        } //console.log(" " + x + ","+y+ " "+rex.odx+","+rex.ody+","+ x2 + "," + y2+" "+rex2.odx+","+rex2.ody);
+
+    },4000)
+
+
+
+    myInterval();
 
     //changePosition2();
 
-
-
-
-    //setInterval(changePosition(), 3000);
-
-
-
-
-
-
-
-
-
-     //codigo animacion
-   /* var paper = Raphael(10, 50, 320, 200);
-    var c = paper.path("M 250 250 l 0 -200 l -50 0 l 0 -50 l -50 0 l 0 50 l -50 0 l 0 50 z");
-    c.attr({ fill: '#000' });
-    c.click(function() {
-        //alert(2);
-        c.animate({
-            path: ("M 250 250 l 0 -40 l -50 0 l 0 -50 l -50 0 l 0 50 l -50 0 l 0 50 z")
-        }, 2000);
-    });
-*/
 
 
 </script>
