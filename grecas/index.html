@@ -30,7 +30,9 @@
     var rex = paper.rect(340, 140, 50, 50).attr("fill", "#E6E6E6");
     var rex2 = paper.rect(340, 190, 50, 50).attr("fill", "#000");
     var rex3= paper.rect(290, 190, 50, 50).attr("fill", "#FF0000");
-    var rex4 = paper.rect(290, 140, 50, 50).attr("fill", "#00FF00");
+    var rex4 = paper.rect(290, 140, 50, 50).attr("fill", "#0000FF");
+    var rex5 = paper.rect(340, 240, 50, 50).attr("fill", "#F00000");
+    var rex6 = paper.rect(290, 240, 50, 50).attr("fill", "#00FF00");
     //var tri = paper.path("M0,0 L100,0 100,50 z").attr("fill", "#E6E6E6");
 
     //t.attr('stroke', '#aceace')
@@ -38,6 +40,8 @@
     rex2.attr('stroke', '#000');
     rex3.attr('stroke', '#000');
     rex4.attr('stroke', '#000');
+    rex5.attr('stroke', '#000');
+    rex6.attr('stroke', '#000');
     //tri.attr('stroke', '#000');
 
     //drag
@@ -59,8 +63,19 @@
     rex2.drag(move,start,up);
     rex3.drag(move,start,up);
     rex4.drag(move,start,up);
+    rex5.drag(move,start,up);
+    rex6.drag(move,start,up);
     //tri.drag(move,start,up);
 
+    //posiciones para comparar
+    var orig_posx = rex.attrs.x;
+    var orig_posx2 = rex.attrs.x;
+    var orig_posx3 = rex.attrs.x;
+    var orig_posx4 = rex.attrs.x;
+    var orig_posy = rex.attrs.x;
+    var orig_posy2 = rex.attrs.y;
+    var orig_posy3 = rex.attrs.y;
+    var orig_posy4 = rex.attrs.y;
 
     function changePosition() {
         //1er acomodo
@@ -76,13 +91,20 @@
 
         rex3.animate({
             x: 340,
-            y: 140,
+            y: 240,
         }, 1000);
         rex4.animate({
             x: 340,
             y: 190,
         }, 1000);
-
+        rex5.animate({
+            x: 340,
+            y: 140,
+        }, 1000);
+        rex6.animate({
+            x: 340,
+            y: 190,
+        }, 1000);
 
 
 
@@ -96,8 +118,8 @@
         }, 1000);
 
         rex2.animate({
-            x: 340,
-            y: 140,
+            x: 290,
+            y: 240,
         }, 1000);
 
         rex3.animate({
@@ -109,6 +131,16 @@
             y: 190,
         }, 1000);
 
+        rex5.animate({
+            x: 340,
+            y: 140,
+        }, 1000);
+        rex6.animate({
+            x: 290,
+            y: 140,
+        }, 1000);
+
+
 
 
     }
@@ -117,7 +149,6 @@
 
 
     var x = 0;
-    var check = false;
     //var text = "";
     //var i = 0;
 
@@ -138,19 +169,26 @@
     var restart = false;
     var myInterval =  setInterval(function(){
 
+
+        //debugge
+
+        //corregir calificador!!!
         x = rex.attrs.x+rex.odx;
-        y = rex.attrs.y+rex.ody;
-        x2 = rex2.attrs.x+rex2.odx;
-        y2 = rex2.attrs.y+rex2.ody;
+        var y = rex.attrs.y+rex.ody;
+        var x2 = rex2.attrs.x+rex2.odx;
+        var y2 = rex2.attrs.y+rex2.ody;
+        var x3 = rex3.attrs.y+rex3.ody;
+        var y3 = rex3.attrs.y+rex3.ody;
+        var x4 = rex4.attrs.y+rex4.ody;
+        var y4 = rex4.attrs.y+rex4.ody;
 
-        var x_final = rex.attrs.x;
-        var y_final = rex.attrs.y;
 
-        if( x === x_final && x2 === x_final &&
-            y === y_final && y2 === y_final){
+
+
+        if( x === orig_posx ){
            // alert("Correcto");
             restart = true;
-
+            alert("entro esta madre");
             if (restart === true) {
 
                 location.reload();
@@ -161,7 +199,7 @@
 
 
 
-    myInterval();
+
 
     //changePosition2();
 
