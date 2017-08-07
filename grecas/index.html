@@ -172,9 +172,6 @@
 
 
         //debugger;
-
-        //i'm in a really weird mood today, i just wanted to say that you're awesome Olia!
-
         //corregir calificador!!!
         x = rex.attrs.x+rex.odx;
         var y = rex.attrs.y+rex.ody;
@@ -185,10 +182,11 @@
         var x4 = rex4.attrs.y+rex4.ody;
         var y4 = rex4.attrs.y+rex4.ody;
 
-
-
-
-        if( x === orig_posx ){
+        //validacion maciza
+        if( x === orig_posx && x2 === orig_posx2 &&
+            x3 === orig_posx3 && x4 === orig_posx4 &&
+            y === orig_posy && y2 === orig_posy2 &&
+            y3 === orig_posy3 && y4 === orig_posy4){
            // alert("Correcto");
             restart = true;
             alert("entro esta madre");
