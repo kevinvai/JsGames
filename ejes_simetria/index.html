@@ -88,7 +88,15 @@ rex2.node.onclick = function(){
 
         tri6.attr('stroke', "blue");
         tri6.attr('stroke-width', "2");
-        check_tri = true;
+        check_tri6 = true;
+    };
+
+    var check_tri7 = false;
+    tri7.node.onclick = function(){
+
+        tri7.attr('stroke', "blue");
+        tri7.attr('stroke-width', "2");
+        check_tri7 = true;
     };
 
 
@@ -98,9 +106,11 @@ rex2.node.onclick = function(){
     var myInterval =  setInterval(function(){
 
 
-        if(check_tri === false || check_tri6 === false) {
+        if(check_tri === true || check_tri6 === true || check_tri7 === true) {
 
-
+            alert(check_tri7);
+        }
+        else{
             if (check_rex === true && check_rex2 === true &&
                 check_circ === true) {
                 alert("correcto");
