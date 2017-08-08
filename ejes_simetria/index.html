@@ -27,8 +27,8 @@
     //crear diferentes figuras y seleccionar las que son simetricas
 
     //3 figuras asimetricas
-    var tri = paper.path("M300,200 L500,0 0,50 z").attr("fill", "#E6E6E6").transform('');//rectangulo triangulo
-    var tri6 = paper.path("M 300,150 L100,100 10,0 z").attr("fill", "#E6E6E6");//rectangulo triangulo
+    var tri = paper.path("M300,200 L100,0 0,50 z").attr("fill", "#E6E6E6").transform('');//rectangulo triangulo
+    var tri6 = paper.path("M 200,150 L100,100 10,0 z").attr("fill", "#E6E6E6");//rectangulo triangulo
     var tri7 = paper.path("M0,50 L0, 100 100 100").attr("fill", "#E6E6E6");//rectangulo triangulo
 
     //3 figuras simetricas
@@ -52,50 +52,76 @@
 var check_rex = false;
 rex.node.onclick = function (){
 
-    rex.attr('stroke', "blue");
-    rex.attr('stroke-width', "2");
+    var currentColor = this.getAttribute('stroke');
+    var targetColor = (currentColor === 'blue') ? 'null' : 'blue';
+    this.setAttribute("stroke", targetColor);
+    this.setAttribute("stroke-width", 2);
     check_rex = true;
 
 };
 
+
 var check_rex2 = false;
 rex2.node.onclick = function(){
 
-    rex2.attr('stroke', "blue");
-    rex2.attr('stroke-width', "2");
+    var currentColor = this.getAttribute('stroke');
+    var targetColor = (currentColor === 'blue') ? 'null' : 'blue';
+    this.setAttribute("stroke", targetColor);
+    this.setAttribute("stroke-width", 2);
     check_rex2 = true;
 };
 
     var check_circ = false;
     circ.node.onclick = function(){
 
-        circ.attr('stroke', "blue");
-        circ.attr('stroke-width', "2");
+        var currentColor = this.getAttribute('stroke');
+        var targetColor = (currentColor === 'blue') ? 'null' : 'blue';
+        this.setAttribute("stroke", targetColor);
+        this.setAttribute("stroke-width", 2);
         check_circ = true;
     };
 
 
     var check_tri = false;
+
     tri.node.onclick = function(){
 
-        tri.attr('stroke', "blue");
-        tri.attr('stroke-width', "2");
-        check_tri = true;
+
+        var currentColor = this.getAttribute('stroke');
+        var targetColor = (currentColor === 'blue') ? 'null' : 'blue';
+        this.setAttribute("stroke", targetColor);
+        this.setAttribute("stroke-width", 2);
+        if(check_tri === false){
+            alert(check_tri);
+            return true;
+
+        }
+
+        if(check_tri === true){
+            alert(check_tri);
+            return false;
+        }
+
+
     };
 
     var check_tri6 = false;
     tri6.node.onclick = function(){
 
-        tri6.attr('stroke', "blue");
-        tri6.attr('stroke-width', "2");
+        var currentColor = this.getAttribute('stroke');
+        var targetColor = (currentColor === 'blue') ? 'null' : 'blue';
+        this.setAttribute("stroke", targetColor);
+        this.setAttribute("stroke-width", 2);
         check_tri6 = true;
     };
 
     var check_tri7 = false;
     tri7.node.onclick = function(){
 
-        tri7.attr('stroke', "blue");
-        tri7.attr('stroke-width', "2");
+        var currentColor = this.getAttribute('stroke');
+        var targetColor = (currentColor === 'blue') ? 'null' : 'blue';
+        this.setAttribute("stroke", targetColor);
+        this.setAttribute("stroke-width", 2);
         check_tri7 = true;
     };
 
@@ -105,10 +131,10 @@ rex2.node.onclick = function(){
     //calificador
     var myInterval =  setInterval(function(){
 
-
+        alert(check_tri);
         if(check_tri === true || check_tri6 === true || check_tri7 === true) {
 
-            //alert(check_tri7);
+            alert("no entra el if");
         }
         else{
             if (check_rex === true && check_rex2 === true &&
@@ -120,14 +146,6 @@ rex2.node.onclick = function(){
     },3000);
 
 
-
 </script>
-
-
-
-
-
-
-
 </body>
 </html>
