@@ -27,7 +27,7 @@
     //crear diferentes figuras y seleccionar las que son simetricas
 
     //3 figuras asimetricas
-    var tri = paper.path("M300,200 L100,0 0,50 z").attr("fill", "#E6E6E6").transform('');//rectangulo triangulo
+    var tri = paper.path("M300,200 L100,0 0,50 z").attr("fill", "#E6E6E6")//rectangulo triangulo
     var tri6 = paper.path("M 200,150 L100,100 10,0 z").attr("fill", "#E6E6E6");//rectangulo triangulo
     var tri7 = paper.path("M0,50 L0, 100 100 100").attr("fill", "#E6E6E6");//rectangulo triangulo
 
@@ -49,6 +49,7 @@
     circ.attr('stroke', '#000');
     circ.attr('opacity', '0.7');
 
+    console.log(rex.transform());
 var check_rex = false;
 rex.node.onclick = function (){
 
@@ -81,7 +82,7 @@ rex2.node.onclick = function(){
         check_circ = true;
     };
 
-
+        //dame creditos
     var check_tri = false;
     tri.node.onclick = function(){
 
@@ -111,8 +112,6 @@ rex2.node.onclick = function(){
         this.setAttribute("stroke-width", 2);
         if(targetColor === 'blue'){
             check_tri6 = true;
-
-
         }
         else{
 
@@ -140,7 +139,16 @@ rex2.node.onclick = function(){
         }
     };
 
+    //animador
+    function animate(){
+        for (var i = 0; i<5; i++ ) {
+            var newX = Math.random() * 700;
+            var newY = Math.random() * 520;
+            rex.animate({cx: newX, cy: newY}, 1000);
+        }
 
+    }
+    setTimeout( animate, 1000);
 
 
     //calificador
@@ -159,8 +167,6 @@ rex2.node.onclick = function(){
             }
         }
     },3000);
-
-
 </script>
 </body>
 </html>
