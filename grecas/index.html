@@ -198,6 +198,68 @@
 
 
 
+    function checkPosition(){
+
+
+       if(rex.attrs.x > 210){
+            rex.attrs.x.240
+    }
+
+
+    function moveTiles() {
+
+        //hacer array con posibles x y con posibles y, usar un random para elegir aleatorio el numero del array
+
+        var possible_x = [];
+        var possible_y = [];
+
+        possible_x[0] = 340;
+        possible_x[1] = 290;
+        possible_x[2] = 290;
+
+        possible_y[0] = 190;
+        possible_y[1] = 140;
+        possible_y[2] = 290;
+        possible_y[3] = 240;
+
+        //validar que no repita la misma posicion
+
+        rex.animate({
+            x: possible_x[Math.floor(Math.random() * 2)],
+            y: possible_y[Math.floor(Math.random() * 4)],
+        }, 500);
+
+        //alert(possible_x[Math.floor(Math.random() * 2)]);
+        rex2.animate({
+            x: possible_x[Math.floor(Math.random() * 2)],
+            y: possible_y[Math.floor(Math.random() * 4)],
+        }, 500);
+
+        rex3.animate({
+            x: possible_x[Math.floor(Math.random() * 2)],
+            y: possible_y[Math.floor(Math.random() * 4)],
+        }, 500);
+        rex4.animate({
+            x: possible_x[Math.floor(Math.random() * 2)],
+            y: possible_y[Math.floor(Math.random() * 4)],
+        }, 500);
+
+        rex5.animate({
+            x: possible_x[Math.floor(Math.random() * 2)],
+            y: possible_y[Math.floor(Math.random() * 4)],
+        }, 500);
+        rex6.animate({
+            x: possible_x[Math.floor(Math.random() * 2)],
+            y: possible_y[Math.floor(Math.random() * 4)],
+        }, 500);
+
+    }
+
+
+
+    }
+
+
 
 
     //changePosition2();
@@ -209,5 +271,6 @@
 
 <!--librerias-->
 <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<button class="btn-modal"onclick="moveTiles()" aleatorio></button>
 </body>
 </html>

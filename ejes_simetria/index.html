@@ -167,6 +167,77 @@ rex2.node.onclick = function(){
             }
         }
     },3000);
+
+
+
+    var possible_x = [];
+    var possible_x2 = [];
+    var possible_y = [];
+    var possible_y2 = [];
+
+    possible_x[0] = 340;
+    possible_x[1] = 290;
+    possible_x[2] = 200;
+    possible_x[3] = 400;
+    possible_x2[0] = 450;
+    possible_x2[1] = 490;
+    possible_x2[2] = 510;
+    possible_x2[3] = 170;
+
+    possible_y[0] = 190;
+    possible_y[1] = 210;
+    possible_y[2] = 170;
+    possible_y[3] = 90;
+    possible_y2[0] = 400;
+    possible_y2[1] = 0;
+    possible_y2[2] = 230;
+    possible_y2[3] = 230;
+
+    function floatObjects() {
+        //2do acomodo
+        rex.animate({
+            x: possible_x[Math.floor(Math.random() * 3)],
+            y: possible_y[Math.floor(Math.random()* 3)]
+        }, 800);
+
+        circ.animate({
+            x: possible_x[Math.floor(Math.random() * 5)],
+            y: possible_y[Math.floor(Math.random()* 4)]
+        }, 800);
+
+        tri.transform("t400,20");
+
+        
+        tri6.transform("t300,90");
+
+
+        tri7.transform("t100,100");
+
+        rex2.animate({
+            x: possible_x2[Math.floor(Math.random() * 3)],
+            y: possible_y2[Math.floor(Math.random()* 3)]
+        }, 800);
+
+        window.onload = function() {
+            var c= Raphael("canvas", 200, 200);
+            var p = c.path("M140 100");
+            var r = c.path("M190 60");
+
+            p.animate({path:"M140 100 L190 60"}, 2000, function () {
+                r.animate({path:"M190 60 L 210 90"}, 2000);
+            });
+        };
+
+
+
+    }
+    //debugger;
+    setInterval(floatObjects,200);
+
+
+    var x = 0;
+    //var text = "";
+    //var i = 0;
 </script>
 </body>
 </html>
