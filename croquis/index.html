@@ -15,7 +15,9 @@
 <script src="../bower_components/raphael/raphael.min.js"></script>
 <script src="../bower_components/jquery/dist/jquery.min.js"></script>
 <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-</body>
+
+
+<!--raphael-->
 <script>
     var paper2 = Raphael(360, 90, 700, 520);
     var paper = Raphael(370, 100, 680, 500);
@@ -23,7 +25,30 @@
     paper2.canvas.style.backgroundColor = '#3B240B';
     paper.canvas.style.backgroundColor = '#088A29';
 
+    var img = paper.image("assets/house2.png", 0, 0, 125, 125);
 
+
+    //drag
+    var start = function () {
+            this.odx = 0;
+            this.ody = 0;
+            //console.log("Init "+this.odx+","+this.ody);
+        },
+        move = function (dx, dy) {
+
+        this.translate(dx - this.odx, dy - this.ody);
+            //console.log(this.translate)
+            this.odx = dx;
+            this.ody = dy;
+            //console.log("move "+dx+","+dy+"  odx "+this.odx+","+this.ody)
+        },
+        up = function () {
+
+        };
+
+    img.drag(move,start);
 </script>
+</body>
+
 
 </html>
