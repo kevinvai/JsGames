@@ -6,7 +6,6 @@
     <link rel="stylesheet" type="text/css" href="../bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
     <link rel="stylesheet" type="text/css" href="../bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
 
-
     <title>Mapa</title>
 
 </head>
@@ -19,13 +18,25 @@
 
 <!--raphael-->
 <script>
-    var paper2 = Raphael(360, 90, 700, 520);
-    var paper = Raphael(370, 100, 680, 500);
+    var paper2 = Raphael(360, 70, 900, 720);
+    var paper = Raphael(370, 80, 880, 700);
 
     paper2.canvas.style.backgroundColor = '#3B240B';
     paper.canvas.style.backgroundColor = '#088A29';
 
-    var img = paper.image("assets/house2.png", 0, 0, 125, 125);
+
+    var img4 = paper.image("assets/road.png", 150, 180, 200, 200);
+    var img5 = paper.image("assets/road.png", 340, 180, 200, 200);
+    var img6 = paper.image("assets/road.png", 520, 180, 200, 200);
+    var img7 = paper.image("assets/road.png", 150, 375, 200, 200);
+    var img8 = paper.image("assets/road.png", 340, 375, 200, 200);
+    var img9 = paper.image("assets/road.png", 520, 375, 200, 200);
+    var img9 = paper.image("assets/road.png", 150, 570, 200, 200);
+    var img9 = paper.image("assets/road.png", 340, 570, 200, 200);
+    var img9 = paper.image("assets/road.png", 520, 570, 200, 200);
+    var img = paper.image("assets/house2.png",  0, 20, 100, 100);
+    var img2 = paper.image("assets/shop2.png",  130, 20, 100, 100);
+    var img3 = paper.image("assets/school.png", 260, 20, 100, 100);
 
 
     //drag
@@ -38,17 +49,44 @@
 
         this.translate(dx - this.odx, dy - this.ody);
             //console.log(this.translate)
-            this.odx = dx;
-            this.ody = dy;
-            //console.log("move "+dx+","+dy+"  odx "+this.odx+","+this.ody)
+            var real_pos = this.odx = dx;
+            var real_posy = this.ody = dy;
+            console.log("move "+real_pos+"," + real_posy);
         },
         up = function () {
 
         };
 
-    img.drag(move,start);
+    img.drag(move,start,up);
+    img2.drag(move,start,up);
+    img3.drag(move,start,up);
+
+
+
+    function calificar(dx,dy){
+        var n = img.odx;
+        var m = img2.odx;
+        var pos1 = img.attrs.x - img.translate(dx-n);
+        var pos2 = img2.attrs.x - img2.translate(dx-m);
+        var position = img.attr("x");
+        var position2 = img2.attr("x");
+
+        alert(n);
+        var distance1 = pos1 - pos2;
+        //var distance2 = img.attrs.y - img2.attrs.y;
+        //console.log(" "+ pos1 + " " + pos2+ " " + distance1);
+            console.log(position);
+
+            if(distance1 === 10){
+                alert("correcto");
+            }
+
+
+
+
+            }
+    setInterval(calificar, 4000);
+
 </script>
 </body>
-
-
 </html>
