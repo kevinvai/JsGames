@@ -15,13 +15,13 @@
 <script src="../bower_components/raphael/raphael.min.js"></script>
 <script src="../bower_components/jquery/dist/jquery.min.js"></script>
 <script>
-    var paper2 = Raphael(360, 90, 700, 520);
+
     var paper = Raphael(370, 100, 680, 500);
 
 
     //paper.canvas.style.backgroundColor = '#E0E0F8';
-    paper2.canvas.style.backgroundColor = '#3B240B';
-    paper.canvas.style.backgroundColor = '#088A29';
+
+    paper.canvas.style.backgroundColor = '#ffffff';
 
 
 
@@ -31,8 +31,8 @@
     var rex2 = paper.rect(340, 190, 50, 50).attr("fill", "#000");
     var rex3= paper.rect(290, 190, 50, 50).attr("fill", "#FF0000");
     var rex4 = paper.rect(290, 140, 50, 50).attr("fill", "#0000FF");
-    var rex5 = paper.rect(340, 240, 50, 50).attr("fill", "#F00000");
-    var rex6 = paper.rect(290, 240, 50, 50).attr("fill", "#00FF00");
+   // var rex5 = paper.rect(340, 240, 50, 50).attr("fill", "#F00000");
+    //var rex6 = paper.rect(290, 240, 50, 50).attr("fill", "#00FF00");
     //var tri = paper.path("M0,0 L100,0 100,50 z").attr("fill", "#E6E6E6");
 
     //t.attr('stroke', '#aceace')
@@ -40,8 +40,8 @@
     rex2.attr('stroke', '#000');
     rex3.attr('stroke', '#000');
     rex4.attr('stroke', '#000');
-    rex5.attr('stroke', '#000');
-    rex6.attr('stroke', '#000');
+    //rex5.attr('stroke', '#000');
+    //rex6.attr('stroke', '#000');
     //tri.attr('stroke', '#000');
 
     //drag
@@ -63,8 +63,8 @@
     rex2.drag(move,start,up);
     rex3.drag(move,start,up);
     rex4.drag(move,start,up);
-    rex5.drag(move,start,up);
-    rex6.drag(move,start,up);
+    //rex5.drag(move,start,up);
+    //rex6.drag(move,start,up);
     //tri.drag(move,start,up);
 
     //posiciones para comparar
@@ -81,30 +81,30 @@
         //1er acomodo
         rex.animate({
             x: 290,
-            y: 190,
+            y: 190
         }, 800);
 
         rex2.animate({
             x: 290,
-            y: 140,
+            y: 140
         }, 800);
 
         rex3.animate({
             x: 340,
-            y: 240,
+            y: 240
         }, 800);
         rex4.animate({
             x: 340,
-            y: 190,
+            y: 190
         }, 800);
-        rex5.animate({
+        /*rex5.animate({
             x: 340,
             y: 140,
         }, 800);
         rex6.animate({
             x: 340,
             y: 190,
-        }, 800);
+        }, 800);*/
 
 
 
@@ -114,31 +114,31 @@
        //2do acomodo
         rex.animate({
             x: 340,
-            y: 190,
+            y: 190
         }, 500);
 
         rex2.animate({
             x: 290,
-            y: 240,
+            y: 240
         }, 500);
 
         rex3.animate({
             x: 340,
-            y: 240,
+            y: 240
         }, 500);
         rex4.animate({
             x: 290,
-            y: 190,
+            y: 190
         }, 500);
 
-        rex5.animate({
+        /*rex5.animate({
             x: 340,
             y: 140,
         }, 500);
         rex6.animate({
             x: 290,
             y: 140,
-        }, 500);
+        }, 500);*/
 
 
 
@@ -171,20 +171,21 @@
 
         //debugger;
         //corregir calificador!!!
-        x = rex.attrs.x+rex.odx;
-        var y = rex.attrs.y+rex.ody;
-        var x2 = rex2.attrs.x+rex2.odx;
-        var y2 = rex2.attrs.y+rex2.ody;
-        var x3 = rex3.attrs.y+rex3.ody;
-        var y3 = rex3.attrs.y+rex3.ody;
-        var x4 = rex4.attrs.y+rex4.ody;
-        var y4 = rex4.attrs.y+rex4.ody;
+        x = rex.odx;
+        var y = rex.ody;
+        var x2 = rex2.odx;
+        var y2 = rex2.ody;
+        var x3 = rex3.odx;
+        var y3 = rex3.ody;
+        var x4 = rex4.odx;
+        var y4 = rex4.ody;
 
         //validacion maciza
-        if( x === orig_posx && x2 === orig_posx2 &&
-            x3 === orig_posx3 && x4 === orig_posx4 &&
-            y === orig_posy && y2 === orig_posy2 &&
-            y3 === orig_posy3 && y4 === orig_posy4){
+        if( x >= 330 && x <= 350 && y >= 130 && y <= 150 &&
+            x2 >= 330 && x2 <= 350 && y2 >= 180 && y2 <= 200 && x3 >= 280
+            && x3 <= 300 && y3 >= 180 && y3 <=200 && x4 >= 280
+            && x4 <= 300 && y4 >=130 && y4 <= 150
+            ){
            // alert("Correcto");
             restart = true;
             alert("entro esta madre");
@@ -198,12 +199,7 @@
 
 
 
-    function checkPosition(){
 
-
-       if(rex.attrs.x > 210){
-            rex.attrs.x.240
-    }
 
 
     function moveTiles() {
@@ -253,7 +249,6 @@
             y: possible_y[Math.floor(Math.random() * 4)],
         }, 500);
 
-    }
 
 
 
@@ -267,10 +262,8 @@
 
 
 </script>
-</div>
-
 <!--librerias-->
 <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<button class="btn-modal"onclick="moveTiles()" aleatorio></button>
+
 </body>
 </html>
