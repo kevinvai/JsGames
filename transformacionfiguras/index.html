@@ -11,17 +11,16 @@
 <div class="navprobase"></div>
 
 <div class="navprobase">
-    <p>Instrucciones: Arma la forma que aparece con<br>triangulos y cuadrados.</p>
+    <p id="instruccion">Instrucciones: Arma la forma que aparece con<br>triangulos y cuadrados.</p>
+
 </div>
 <script src="../bower_components/raphael/raphael.min.js"></script>
 <script src="../bower_components/jquery/dist/jquery.min.js"></script>
 <script>
 
 
-    var paper2 = Raphael(360, 90, 700, 520);
     var paper = Raphael(370, 100, 680, 500);
-    paper2.canvas.style.backgroundColor = '#3B240B';
-    paper.canvas.style.backgroundColor = '#088A29';
+    paper.canvas.style.backgroundColor = '#ffffff';
 
 
 
@@ -42,17 +41,17 @@
 
 //Seleccion de cases
         if (al === 1) {
-
+            $("#instruccion").text("Arma el rectangulo con los dos cuadrados");
             paper.print(100, 100, "Arma la figura!", paper.getFont("Times", 900), 30);
             var rect = paper.rect(300, 200, 100, 50).attr("fill", "#E6E6E6");
             rect.attr('stroke', '#000');
             rect.attr('opacity', '1');
             rex = paper.rect(300, 400, 50, 50).attr("fill", "#E6E6E6");
             rex2 = paper.rect(200, 400, 50, 50).attr("fill", "#E6E6E6");
-            var x = rex.attrs.x;
-            var y = rex.attrs.y;
-            var x2 = rex2.attrs.x;
-            var y2 = rex2.attrs.y;
+            var x = rex.odx;
+            var y = rex.ody;
+            var x2 = rex2.odx;
+            var y2 = rex2.ody;
 
             /*function checkPosition() {
                 console.log(x, y);
@@ -85,26 +84,18 @@
             //comparador de posiciones
             var restart;
             var myInterval =  setInterval(function () {
-                x = rex.attrs.x;
-                y = rex.attrs.y;
-                x2 = rex2.attrs.x;
-                y2 = rex2.attrs.y;
+                x = rex.odx;
+                y = rex.ody;
+                x2 = rex2.odx;
+                y2 = rex2.ody;
 
-                var x_final = rect.attrs.x;
-                var y_final = rect.attrs.y;
+                if(x >= 290 && x <=310 && y >=190 && y <= 210){
 
-                if (x && x2 === x_final && y && y2 === y_final) {
-                    alert("Correcto");
-                    restart = true;
+                    alert("correcto");
 
-                    if (restart === true) {
-                        location.reload();
-                    }
                 }
-                console.log(" " + x + "  " + x2 + " " + y + y2);
 
-                x2 = 0;
-                y2 = 0;
+                console.log(" " + x + "  " + x2 + " " + y + y2);
             }, 10000)
         }
 
